@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import data from '../data';
 
 function SingleProduct() {
@@ -7,13 +8,13 @@ function SingleProduct() {
         {
             data.products.map((product) => (
             <div className="product" key={product.slug}>
-                <a href={`product/${product.slug}`} className="product__thumbnail">
+                <Link to={`product/${product.slug}`} className="product__thumbnail">
                 <img src={product.image} alt="No Image"/>
-                </a>
+                </Link>
                 <div className="product__content">
-                <a href={`/product/${product.slug}`} className="product__name">
+                <Link to={`/product/${product.slug}`} className="product__name">
                     <p>{product.name}</p>
-                </a>
+                </Link>
                 <p className="product__price"><strong>${product.price}</strong></p>
                 <button className="product__button">Add to cart</button>
                 </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import SingleProduct from "./SingleProduct";
+import SingleProduct from "../components/SingleProduct";
 
 function FrontPage() {
     return (
