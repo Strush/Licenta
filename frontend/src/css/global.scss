@@ -1,0 +1,91 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+/* Reset default style */
+
+body {
+    font-family: $ms-regular;
+  }
+  
+img {
+    width: max-content;
+    height: auto;
+}
+  
+a {
+    display: block;
+    text-decoration: none;
+    transition: 0.3s ease-in;
+
+    &:hover {
+      //color: $teal !important;
+      transition: 0.3s ease-in;
+
+    }
+}
+
+ul,ol,li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Custom clases */
+.block {
+  display: block;
+}
+
+.mb-xs {
+  margin-bottom: $xs;
+}
+
+.mt-xs {
+  margin-top: $xs;
+}
+
+.mb-sm {
+  margin-bottom: $sm;
+}
+
+
+/* buttons */
+.btn {
+  appearance: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: teal;
+  width: 100%;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  border: 2px solid $teal;
+  font-size: 16px;
+  text-transform: uppercase;
+
+  &:hover {
+    color: #fff;
+    outline: 0;
+  }
+}
+
+/* Buttons hover */
+.btn-teal {
+  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+  &:hover {
+    box-shadow: 0 0 40px 40px $teal inset;
+  }
+}
+
+/* container */
+.container {
+    max-width: 1200px;
+    display: block;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}

@@ -1,0 +1,59 @@
+/* Header */
+.header {
+    background-color: $teal;
+}   
+
+.header__nav {
+    display: flex;
+    align-items: center;
+    min-height: 100px;
+    height: 100%;
+}
+
+.header__logo a {
+    color: $white;
+    font-size: $lg;
+    font-variant: unicase;
+}
+
+/* Main */
+main {
+    padding: $xl 0;
+}
+
+/* Products */
+.products {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 25px;
+
+    .product {
+
+        .thumbnail {
+            background-color: $teal;
+            height: 200px;
+          }
+        
+        .content {
+            padding: 20px;
+            border: 1.5px solid $teal;
+        }
+
+        .name {
+            margin-bottom: 16px;
+            color: $black;
+            font-weight: 600;
+        }
+        
+        .price {
+            text-align: right;
+            margin-bottom: 16px;
+        }
+    }
+
+}
+  
+
+/* Footer */
+
+// to do

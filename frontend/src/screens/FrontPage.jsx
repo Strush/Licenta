@@ -1,11 +1,11 @@
 import React from "react";
-import SingleProduct from "../components/SingleProduct";
+import ProductScreen from "./ProductScreen";
+
+
 
 function FrontPage() {
     return (
-        <div className="products">
-            <SingleProduct/>
-        </div>
+        <ProductScreen />
     )
 }
 
