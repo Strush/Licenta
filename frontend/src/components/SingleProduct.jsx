@@ -59,20 +59,15 @@ function SingleProduct() {
                   <Rating rating={product.rating} numReviews={product.numReviews} />
               <p className='description'>{product.description}</p>
             </div>
-            {
-              product.countInStock  ? 
-              (
-              <div className='product__cart'>
-                <div className='mb-sm'>Price: {product.price}$</div>
-                <p className='mb-sm'>Status: In stock <strong>{product.countInStock}</strong></p>
-                <button className='btn btn-teal'>Add to Cart</button>
+
+            <div className='product__cart'>
+              <div className='mb-sm'>Price: {product.price}$</div>
+              <div className='status'>
+                <p>Status:</p>
+                <p className={product.countInStock ? 'bage bage-success mb-20' : 'bage bage-danger'}>{product.countInStock ? 'In stock' : 'Unavailable'}</p>
               </div>
-              ) : (
-                <div>
-                  Unvaible
-                </div>
-              )
-            }
+              {product.countInStock ? <button className='btn btn-teal'>Add to Cart</button> : ''}
+            </div>
 
           </div>
         </div>

@@ -55,6 +55,17 @@
     width: 100%;
     max-width: 210px;
     border-radius: 2px;
+
+    .status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      column-gap: 5px;
+
+      p:last-of-type {
+        font-size: 14px;
+      }
+    }
   }
 
   .description {
