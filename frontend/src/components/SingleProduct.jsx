@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useReducer } from 'react'
+import { Helmet } from 'react-helmet-async';
 import { Link, useParams } from 'react-router-dom';
 import Rating from './Rating';
 
@@ -48,8 +49,11 @@ function SingleProduct() {
           <div className='product__thumbnail'>
               <div className='product__img'></div>
           </div>
+          <Helmet>
+            <title>{product.name}</title>
+          </Helmet>    
           <div className="product__content">
-            <div>
+            <div>          
               <h2 className='title'>{product.name}</h2>
               <span className='price'>Price: <strong>{product.price}$</strong></span>
                   <Rating rating={product.rating} numReviews={product.numReviews} />
