@@ -11,7 +11,7 @@ body {
   }
   
 img {
-    width: max-content;
+    max-width: 100%;
     height: auto;
 }
   
@@ -46,6 +46,10 @@ ul,ol,li {
   margin-bottom: 20px;
 }
 
+.mt-20 {
+  margin-top: 20px;
+}
+
 .mt-xs {
   margin-top: $xs;
 }
@@ -54,6 +58,15 @@ ul,ol,li {
   margin-bottom: $sm;
 }
 
+/* Spinner*/
+.loading-box {
+  width: 80px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: transparent;
+}
 
 /* buttons */
 .btn {

@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useReducer } from 'react'
 import { Helmet } from 'react-helmet-async';
 import { Link, useParams } from 'react-router-dom';
+import LoadingBox from './LoadingBox';
 import Rating from './Rating';
 
 const reducer = (state, action) => {
@@ -44,7 +45,7 @@ function SingleProduct() {
 
   return (
     <>
-      { loading ? (<div>Loading...</div>) : error ? (<div>{error}</div>) : (
+      { loading ? (<LoadingBox />) : error ? (<div>{error}</div>) : (
         <div className="single__product">
           <div className='product__thumbnail'>
               <div className='product__img'></div>
@@ -64,9 +65,9 @@ function SingleProduct() {
               <div className='mb-sm'>Price: {product.price}$</div>
               <div className='status'>
                 <p>Status:</p>
-                <p className={product.countInStock ? 'bage bage-success mb-20' : 'bage bage-danger'}>{product.countInStock ? 'In stock' : 'Unavailable'}</p>
+                <p className={product.countInStock ? 'bage bage-success' : 'bage bage-danger'}>{product.countInStock ? 'In stock' : 'Unavailable'}</p>
               </div>
-              {product.countInStock ? <button className='btn btn-teal'>Add to Cart</button> : ''}
+              {product.countInStock ? <button className='btn btn-teal mt-20'>Add to Cart</button> : ''}
             </div>
 
           </div>
