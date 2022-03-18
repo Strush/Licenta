@@ -34,7 +34,7 @@ function App() {
               <Link to='/'>Eoomi</Link>
             </div>
             <div className='footer__nav'>
-              <p>Eoomi &copy;, Toate drepturile au fost rezervate.</p>
+              <p className='copyright'>Eoomi &copy;, Toate drepturile au fost rezervate.</p>
             </div>
             </div>
           </div>

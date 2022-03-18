@@ -11,14 +11,13 @@
 }
 
 .header__logo a {
-    color: $white;
-    font-size: $lg;
-    font-variant: unicase;
+    @include logo;
 }
 
 /* Main */
 main {
-    padding: $xl 0;
+    padding: 30px 0;
+    min-height: 70vh;
 }
 
 /* Products */
@@ -55,5 +54,20 @@ main {
   
 
 /* Footer */
+.footer {
+    padding: 25px 0;
 
+    .footer__log a {
+        @include logo;
+    }
+
+    .content {
+        @include flex-between;
+    }
+
+    .copyright {
+        color: #fff;
+        font-size: 18px;
+    }
+}
 // to do

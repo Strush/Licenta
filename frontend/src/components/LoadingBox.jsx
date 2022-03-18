@@ -1,5 +1,5 @@
 import React from 'react'
-import spinner from './images/spinner.svg';
+import spinner from '../images/spinner.svg';
 
 export default function LoadingBox() {
   return (

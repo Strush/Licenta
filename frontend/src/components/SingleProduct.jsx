@@ -1,8 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useReducer } from 'react'
 import { Helmet } from 'react-helmet-async';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import getError from '../utils';
 import LoadingBox from './LoadingBox';
+import Messagebox from './MessageBox';
 import Rating from './Rating';
 
 const reducer = (state, action) => {
@@ -37,7 +39,7 @@ function SingleProduct() {
           const result = await axios.get(`/api/products/slug/${slug}`);
           dispatch({type: 'FETCH_SUCCESS', payload: result.data });
         } catch(err) {
-          dispatch({type: 'FETCH_FAIL', payload: err.message});
+          dispatch({type: 'FETCH_FAIL', payload: getError(err) });
         }
       }
       fetchData();
@@ -45,7 +47,7 @@ function SingleProduct() {
 
   return (
     <>
-      { loading ? (<LoadingBox />) : error ? (<div>{error}</div>) : (
+      { loading ? (<LoadingBox />) : error ? (<Messagebox variant="danger">{error}</Messagebox>) : (
         <div className="single__product">
           <div className='product__thumbnail'>
               <div className='product__img'></div>

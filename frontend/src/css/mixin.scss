@@ -1,0 +1,26 @@
+@mixin logo {
+    color: white;
+    font-size: 35px;
+    font-feature-settings: "unic";
+    font-variant: unicase;
+}
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@mixin message {
+    padding: 10px 15px;
+    text-align: center;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 500;
+}

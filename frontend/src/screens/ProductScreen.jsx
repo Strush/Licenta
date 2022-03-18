@@ -2,6 +2,7 @@ import React, { useEffect, useReducer } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import LoadingBox from "../components/LoadingBox";
+import Messagebox from "../components/MessageBox";
 
 // Am creat reducer
 const reducer = (state,action) => {
@@ -42,8 +43,8 @@ function ProductScreen(){
         <div className="products">
             {
                 loading ? (<LoadingBox />)
-                : error ? (<div>{error}</div>) 
-                : (
+                : error ? (<Messagebox variant="danger">{error}</Messagebox>) 
+                : ( 
                     products.map((product) => (
                         <div className="product" key={product.slug}>
                             <Link to={`product/${product.slug}`} className="thumbnail">
