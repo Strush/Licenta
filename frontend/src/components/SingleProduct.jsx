@@ -1,11 +1,12 @@
 import axios from 'axios';
-import React, { useEffect, useReducer } from 'react'
+import React, { useContext, useEffect, useReducer } from 'react'
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import getError from '../utils';
 import LoadingBox from './LoadingBox';
 import Messagebox from './MessageBox';
 import Rating from './Rating';
+import {Store} from '../Store';
 
 const reducer = (state, action) => {
   switch(action.type) {
@@ -18,7 +19,6 @@ const reducer = (state, action) => {
     default: 
       return state;
   }
-  
 }
 
 function SingleProduct() {
@@ -45,6 +45,16 @@ function SingleProduct() {
       fetchData();
   }, [slug]);
 
+    // Adaugam produsul in cos
+  const {state, dispatch: ctxDispatch} = useContext(Store);
+
+  const addToCartHandler = () => {
+    ctxDispatch({
+      type: 'CART_ADD_ITEM',
+      payload: {...product, quantity: 1}
+    })
+  }
+
   return (
     <>
       { loading ? (<LoadingBox />) : error ? (<Messagebox variant="danger">{error}</Messagebox>) : (
@@ -69,7 +79,7 @@ function SingleProduct() {
                 <p>Status:</p>
                 <p className={product.countInStock ? 'bage bage-success' : 'bage bage-danger'}>{product.countInStock ? 'In stock' : 'Unavailable'}</p>
               </div>
-              {product.countInStock ? <button className='btn btn-teal mt-20'>Add to Cart</button> : ''}
+              {product.countInStock ? <button className='btn btn-teal mt-20' onClick={addToCartHandler}>Add to Cart</button> : ''}
             </div>
 
           </div>

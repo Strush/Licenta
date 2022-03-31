@@ -1,9 +1,15 @@
+import { useContext } from 'react';
 import { Helmet } from 'react-helmet-async';
 import {BrowserRouter, Link, Route, Routes} from 'react-router-dom';
 import SingleProduct from './components/SingleProduct';
 import FrontPage from './screens/FrontPage';
+import { Store } from './Store';
 
 function App() {
+
+  const {state} = useContext(Store);
+  const { cart } = state;
+  console.log(state);
   return (
     <BrowserRouter>
     <div className="App">
@@ -12,9 +18,16 @@ function App() {
         </Helmet>  
         <header className="header">
           <div className="container">
-            <div className="header__nav">
-              <div className='header__logo'>
+            <div className="nav">
+              <div className='logo'>
                 <Link to='/'>Eoomi</Link>
+              </div>
+              <div className='menu'>
+                  <div className='cart'>Cart
+                  {cart.cartItems.length > 0 && (
+                    <div className='badge'>{cart.cartItems.length}</div>
+                  )}
+                  </div>
               </div>
             </div>
           </div>

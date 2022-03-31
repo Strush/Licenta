@@ -3,15 +3,39 @@
     background-color: $teal;
 }   
 
-.header__nav {
-    display: flex;
-    align-items: center;
-    min-height: 100px;
-    height: 100%;
-}
+.header {
+    .cart {
+        color: #fff;
+        font-size: 20px;
+        position: relative;
+        font-weight: 500;
+        cursor: pointer;
+        padding-right: 20px;
 
-.header__logo a {
-    @include logo;
+        .badge {
+            position: absolute;
+            background: red;
+            min-width: 25px;
+            border: 1px solid #fff;
+            height: 24px;
+            left: 55%;
+            top: -13px;
+            font-size: 14px;
+            border-radius: 50%;
+            @include flex-center;
+        }
+    }
+    .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 100px;
+        height: 100%;
+    }
+    
+    .logo a {
+        @include logo;
+    }
 }
 
 /* Main */
