@@ -45,13 +45,22 @@ function SingleProduct() {
       fetchData();
   }, [slug]);
 
-    // Adaugam produsul in cos
+  // Adaugam produsul in cos
   const {state, dispatch: ctxDispatch} = useContext(Store);
+  const {cart} = state;
 
-  const addToCartHandler = () => {
+  const addToCartHandler = async () => {
+    const existProduct = cart.cartItems.find((x) => x._id === product._id);
+    const quantity = existProduct ? existProduct.quantity + 1 : 1;
+    const {data} = await axios.get(`/api/products/${product._id}`);
+    if(data.countInStock < quantity){
+      window.alert('Produsul nu se afla in stock');
+      return;
+    }
+
     ctxDispatch({
       type: 'CART_ADD_ITEM',
-      payload: {...product, quantity: 1}
+      payload: {...product, quantity}
     })
   }
 

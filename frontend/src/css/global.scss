@@ -98,6 +98,11 @@ ul,ol,li {
   }
 }
 
+.btn-disable {
+  pointer-events: none;
+  color: #ccc;
+  border: 2px solid #ccc;
+}
 /* container */
 .container {
     max-width: 1200px;

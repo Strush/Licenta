@@ -25,7 +25,7 @@ function App() {
               <div className='menu'>
                   <div className='cart'>Cart
                   {cart.cartItems.length > 0 && (
-                    <div className='badge'>{cart.cartItems.length}</div>
+                    <div className='badge'>{cart.cartItems.reduce((a,c) => a + c.quantity,0)}</div>
                   )}
                   </div>
               </div>

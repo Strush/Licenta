@@ -55,7 +55,10 @@ function ProductScreen(){
                                     <p>{product.name}</p>
                                  </Link>
                                 <p className="price"><strong>${product.price}</strong></p>
-                                <button className="btn btn-teal">Add to cart</button>
+                                {(product.countInStock > 0) ? (<Link to={`/product/${product.slug}`} className="btn btn-teal">Add to cart</Link>) : (
+                                    <button className="btn btn-disable">Stock Epuizat</button>
+                                ) }
+
                             </div>
                         </div>
                     ))
