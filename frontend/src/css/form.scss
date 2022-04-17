@@ -1,0 +1,46 @@
+.sign-in {
+    box-shadow: $shadow-card;
+    padding: 40px;
+    border-radius: 3px;
+
+    .form {
+        margin-top: 25px;
+    }
+
+    .form__item {
+        margin-bottom: 25px;
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        input {
+            padding: 8px 10px;
+            font-size: 16px;
+            width: 100%;
+            border: 1.2px solid teal;
+            border-radius: 3px;
+        }
+
+        input:focus {
+            outline: 1.4px solid green;
+        }
+    }
+
+    .form__btn {
+        padding-top: 10px;
+        margin-bottom: 25px;
+    }
+
+    .form__new-user {
+        display: flex;
+        align-items: center;
+
+        a {
+            margin-left: 5px;
+            color: $orange;
+        }
+    }
+}

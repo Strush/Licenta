@@ -27,9 +27,6 @@ function ProductScreen(props){
         error: '',
     });
 
-    const {product} = props;
-    console.log(product);
-
     const {state, dispatch: ctxContext}  = useContext(Store);
     const {
         cart: {cartItems}

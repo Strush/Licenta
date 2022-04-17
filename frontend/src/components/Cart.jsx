@@ -38,7 +38,7 @@ export default function Cart() {
   return (
     <div className='cart'>
         <Helmet>
-            <title>Cart</title>
+            <title>Coș</title>
         </Helmet>
         {cartItems.length ? (
             <>
@@ -53,7 +53,7 @@ export default function Cart() {
                         </div>
                         <div className='controls'>
                         <button className='icon mr-10' 
-                                disabled={item.quantity === 0}
+                                disabled={item.quantity === 1}
                                 onClick={() => updateCartHandler (item,item.quantity - 1)}
                             >
                                 <img src={minus} alt="Minus icon" />

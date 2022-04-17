@@ -10,11 +10,17 @@ body {
     font-family: $ms-regular;
   }
   
+.small-container {
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+    
 img {
     max-width: 100%;
     height: auto;
 }
-  
+
 a {
     display: block;
     text-decoration: none;
@@ -36,9 +42,15 @@ ul,ol,li {
 button {
   border: none;
 }
+
 button:disabled,
 button[disabled]{
   opacity: 0.5;
+}
+
+h1 {
+  font-size: 35px;
+  line-height: 45px;
 }
 
 /* Custom clases */
