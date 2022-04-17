@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { Helmet } from 'react-helmet-async';
 import {BrowserRouter, Link, Route, Routes} from 'react-router-dom';
+import Cart from './components/Cart';
 import SingleProduct from './components/SingleProduct';
 import FrontPage from './screens/FrontPage';
 import { Store } from './Store';
@@ -23,11 +24,11 @@ function App() {
                 <Link to='/'>Eoomi</Link>
               </div>
               <div className='menu'>
-                  <div className='cart'>Cart
+                  <Link className='cart' to={'/cart'}>Cart
                   {cart.cartItems.length > 0 && (
                     <div className='badge'>{cart.cartItems.reduce((a,c) => a + c.quantity,0)}</div>
                   )}
-                  </div>
+                  </Link>
               </div>
             </div>
           </div>
@@ -37,6 +38,7 @@ function App() {
             <Routes>
               <Route path='/' element={<FrontPage />} />
               <Route path='/product/:slug' element={<SingleProduct/>} />
+              <Route path='/cart' element={<Cart/>} />
             </Routes>
           </div>
         </main>

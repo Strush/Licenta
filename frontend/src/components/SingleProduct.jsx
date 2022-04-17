@@ -69,7 +69,7 @@ function SingleProduct() {
       { loading ? (<LoadingBox />) : error ? (<Messagebox variant="danger">{error}</Messagebox>) : (
         <div className="single__product">
           <div className='product__thumbnail'>
-              <div className='product__img'></div>
+              <img className='product__img' src={product.image} alt="No Image"></img>
           </div>
           <Helmet>
             <title>{product.name}</title>
@@ -88,7 +88,7 @@ function SingleProduct() {
                 <p>Status:</p>
                 <p className={product.countInStock ? 'bage bage-success' : 'bage bage-danger'}>{product.countInStock ? 'In stock' : 'Unavailable'}</p>
               </div>
-              {product.countInStock ? <button className='btn btn-teal mt-20' onClick={addToCartHandler}>Add to Cart</button> : ''}
+              {product.countInStock ? <button className='btn btn-teal mt-20' onClick={addToCartHandler}>Adaugă în Coș</button> : ''}
             </div>
 
           </div>

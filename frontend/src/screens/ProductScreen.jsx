@@ -1,8 +1,9 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useContext, useEffect, useReducer } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import LoadingBox from "../components/LoadingBox";
 import Messagebox from "../components/MessageBox";
+import { Store } from "../Store";
 
 // Am creat reducer
 const reducer = (state,action) => {
@@ -18,13 +19,21 @@ const reducer = (state,action) => {
     }
 } 
 
-function ProductScreen(){
+function ProductScreen(props){
 
     const [{loading,products,error},dispatch] = useReducer(reducer,{
         loading: true,
         products: [],
         error: '',
     });
+
+    const {product} = props;
+    console.log(product);
+
+    const {state, dispatch: ctxContext}  = useContext(Store);
+    const {
+        cart: {cartItems}
+    } = state;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -39,6 +48,22 @@ function ProductScreen(){
         fetchData();
     }, []);
 
+    const addToCart = async (item) => {
+        const existProduct = cartItems.find((x) => x._id === item._id);
+        const quantity = existProduct ? existProduct.quantity + 1 : 1;
+
+        const {data} = await axios.get(`/api/products/${item._id}`);
+        if(data.countInStock < quantity){
+            window.alert('Produsul nu mai este in stock');
+            return;
+        }
+        ctxContext({
+            type: 'CART_ADD_ITEM',
+            payload: {...item, quantity}
+        })
+
+    }
+
     return (
         <div className="products">
             {
@@ -48,14 +73,14 @@ function ProductScreen(){
                     products.map((product) => (
                         <div className="product" key={product.slug}>
                             <Link to={`product/${product.slug}`} className="thumbnail">
-                                <div className='product__img'></div>
+                                <img className='product__img' src={product.image} alt={product.slug} />
                             </Link>
                             <div className="content">
                                 <Link to={`/product/${product.slug}`} className="name">
                                     <p>{product.name}</p>
                                  </Link>
                                 <p className="price"><strong>${product.price}</strong></p>
-                                {(product.countInStock > 0) ? (<Link to={`/product/${product.slug}`} className="btn btn-teal">Add to cart</Link>) : (
+                                {(product.countInStock > 0) ? (<button className="btn btn-teal" onClick={() => addToCart(product)}>Adaugă în Coș</button>) : (
                                     <button className="btn btn-disable">Stock Epuizat</button>
                                 ) }
 

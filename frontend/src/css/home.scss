@@ -51,15 +51,23 @@ main {
     grid-gap: 25px;
 
     .product {
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
         .thumbnail {
-            background-color: $teal;
-            height: 200px;
+            background-color: #fff;
+            height: 220px;
+            box-shadow: rgb(33 35 38 / 10%) 0px 10px 10px -10px;
+
+            img {
+                padding: 20px;
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+            }
           }
         
         .content {
             padding: 20px;
-            border: 1.5px solid $teal;
         }
 
         .name {

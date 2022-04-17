@@ -2,6 +2,7 @@
 .single__product {
     display: grid;
     grid-template-columns: 40% 60%;
+    box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
 
   .title {
     margin-bottom: $sm;
@@ -36,15 +37,20 @@
   }
 
   .product__thumbnail {
-    background-color: $teal;
+    background-color: #fff;
     height: 400px;
+    box-shadow: $shadow-right;
+
+    img {
+      padding: 30px;
+      @include product-image;
+    }
   }
 
   .product__content {
     display: flex;
     justify-content: space-between;
     column-gap: $md;
-    box-shadow: $shadow-bold;
     padding: 25px;
   }
 
@@ -65,6 +71,10 @@
       p:last-of-type {
         font-size: 14px;
       }
+    }
+
+    button {
+      font-size: 14px;
     }
   }
 

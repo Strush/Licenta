@@ -11,6 +11,7 @@ $white: white;
 $black: #000;
 $teal: teal;
 $orange: orange;
+$whitesmoke: whitesmoke;
 
 /* MARGIN */
 $xs: 10px;
@@ -22,3 +23,7 @@ $xl: 45px;
 /* Box shadow */
 $shadow-bold: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 $shadow-light: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+$shadow-white: rgb(149 157 165 / 20%) 0px 8px 24px;
+$shadow-card: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+$shadow-right: rgb(33 35 38 / 10%) 10px 0px 10px -10px;
+$shadow-bottom: rgb(33 35 38 / 10%) 0px 10px 10px -10px;
