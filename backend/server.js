@@ -1,5 +1,4 @@
 import express from "express";
-import data from "./data.js";
 import dotenv from 'dotenv';
 import mongoose from "mongoose";
 import seedRouter from "./routes/seedRoutes.js";
@@ -18,10 +17,10 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
     console.log(err.message)
 })
 
-// Trimitem produsele pe un API, din DB
+// Seed API (Mongodb)
 app.use('/api/seed', seedRouter);
 
-// Trimitem produsele pe un API
+// Trimitem produsele pe un API, din DB
 app.use('/api/products',productRouter);
 
 app.listen(port, () => {
