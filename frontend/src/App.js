@@ -11,7 +11,7 @@ function App() {
 
   const {state} = useContext(Store);
   const { cart } = state;
-  console.log(state);
+
   return (
     <BrowserRouter>
     <div className="App">

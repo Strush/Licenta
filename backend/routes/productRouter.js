@@ -18,7 +18,7 @@ productRouter.get('/slug/:slug', async (req,res) => {
     }
 });
 
-// Cautam produsul in DB dupa id `req.params._id`
+// Cautam produsul in DB dupa id
 productRouter.get('/:id', async (req,res) => {
     const product = await Product.findById(req.params.id);
     if(product){
