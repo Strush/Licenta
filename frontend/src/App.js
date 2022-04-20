@@ -1,6 +1,8 @@
 import { useContext } from 'react';
 import { Helmet } from 'react-helmet-async';
 import {BrowserRouter, Link, Route, Routes} from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Cart from './components/Cart';
 import SingIn from './components/SingIn';
 import SingleProduct from './components/SingleProduct';
@@ -21,6 +23,7 @@ function App() {
   return (
     <BrowserRouter>
     <div className="App">
+      <ToastContainer position="bottom-center" limit={1} />
         <Helmet>
           <title>Eoomi</title>
         </Helmet>  

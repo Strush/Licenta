@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
 import { Store } from '../Store';
+import getError from '../utils';
 
 export default function SingIn() {
   const {search} = useLocation();
@@ -27,7 +29,7 @@ export default function SingIn() {
       localStorage.setItem('userInfo', JSON.stringify(data));
       navigate(redirect || '/');
     }catch(err) {
-      alert('Invalid email ori parola');
+      toast.error(getError(err));
     }
   }
 
