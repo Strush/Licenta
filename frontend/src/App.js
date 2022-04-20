@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Helmet } from 'react-helmet-async';
 import {BrowserRouter, Link, Route, Routes} from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Cart from './components/Cart';
 import SingIn from './components/SingIn';
@@ -9,6 +9,7 @@ import SingleProduct from './components/SingleProduct';
 import FrontPage from './screens/FrontPage';
 import { Store } from './Store';
 import {Dropdown} from 'react-bootstrap';
+import Shipping from './components/Shipping';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
   const signOutHandler = () => {
     ctxDispatch({type:'USER_SIGN_OUT'});
     localStorage.removeItem('userInfo');
+    localStorage.removeItem('shippingAddress');
   }
 
   return (
@@ -68,6 +70,7 @@ function App() {
               <Route path='/product/:slug' element={<SingleProduct/>} />
               <Route path='/cart' element={<Cart/>} />
               <Route path='/signin' element={<SingIn/>} />
+              <Route path='/shipping' element={<Shipping />} />
             </Routes>
           </div>
         </main>

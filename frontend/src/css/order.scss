@@ -1,0 +1,11 @@
+.finish-steps > div {
+    border-bottom: 0.2rem solid #a0a0a0;
+    color: #a0a0a0;
+    font-size: 14px;
+    padding: 10px 5px;
+  }
+  .finish-steps > div.active {
+    border-bottom: 0.2rem solid $teal;
+    color: $teal;
+    font-weight: 600;
+  }
