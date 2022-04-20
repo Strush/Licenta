@@ -53,7 +53,9 @@ const reducer = (state, action) => {
         }
 
         case 'USER_SIGN_OUT': {
-            return {...state, userInfo: null, cart: {shippingAddress: {},cartItems: []}};
+            return {...state, userInfo: null, 
+                cart: {cartItems: [], shippingAddress: {}}
+            };
         }
 
         case 'SAVE_SHIPPING_ADDRESS': {

@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
+import { Button, Form } from 'react-bootstrap';
+import { Helmet } from 'react-helmet-async';
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import { Store } from '../Store';
@@ -41,35 +43,34 @@ export default function SingIn() {
   }, [navigate, redirect, userInfo]);
 
   return (
-    <div className='sign-in small-container'>
-        <h1 className='title'>Sign In</h1>
-      <form className='form' onSubmit={submitForm}>
-        <div className='form__item'>
-            <label htmlFor="email">Email</label>
-            <input 
+    <div className='signin small-container'>
+      <Helmet>Autentificare</Helmet>
+      <h1 className='title'>Autentificare</h1>
+      <Form onSubmit={submitForm} className="form form--signin">
+        <Form.Group controlId="email">
+          <Form.Label>Email</Form.Label>
+          <Form.Control 
               name="email" 
               type="email" 
-              id="email" 
               placeholder="admin@example.com"
               onChange={(e) => setEmail(e.target.value)}
               required 
-            />
-        </div>
-        <div className='form__item'>
-            <label htmlFor="password">Password</label>
-            <input 
+          />
+        </Form.Group>
+        <Form.Group controlId="password" className='pb-1'>
+          <Form.Label>Password</Form.Label>
+          <Form.Control 
               name="password" 
               type="password" 
-              id="password"
               onChange={(e)=> setPassword(e.target.value)} 
-              required  
-            />
-        </div>
-        <div className='form__btn'>
-            <button type='submit' className='btn btn-teal'>Autentificare</button>
-        </div>
-      </form>
-      <div className='form__new-user'>
+              required 
+          />
+        </Form.Group>
+        <Button variant="success" type="submit">
+            Autentificare
+        </Button>
+      </Form>
+      <div className='form-info__user'>
           <p>Sunteți utilizator nou,</p>
           <Link to={`/signup?redirect=${redirect}`}> Creați-vă un cont.</Link>
       </div>

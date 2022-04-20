@@ -10,6 +10,7 @@ import FrontPage from './screens/FrontPage';
 import { Store } from './Store';
 import {Dropdown} from 'react-bootstrap';
 import Shipping from './components/Shipping';
+import SignUp from './components/SignUp';
 
 function App() {
 
@@ -70,6 +71,7 @@ function App() {
               <Route path='/product/:slug' element={<SingleProduct/>} />
               <Route path='/cart' element={<Cart/>} />
               <Route path='/signin' element={<SingIn/>} />
+              <Route path='/signup' element={<SignUp/>} />
               <Route path='/shipping' element={<Shipping />} />
             </Routes>
           </div>
