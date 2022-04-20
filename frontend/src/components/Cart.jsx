@@ -36,7 +36,7 @@ export default function Cart() {
     }
 
   return (
-    <div className='cart'>
+    <div className='cart-page'>
         <Helmet>
             <title>Coș</title>
         </Helmet>

@@ -6,11 +6,17 @@ import SingIn from './components/SingIn';
 import SingleProduct from './components/SingleProduct';
 import FrontPage from './screens/FrontPage';
 import { Store } from './Store';
+import {Dropdown} from 'react-bootstrap';
 
 function App() {
 
-  const {state} = useContext(Store);
-  const { cart } = state;
+  const {state, dispatch: ctxDispatch} = useContext(Store);
+  const { cart, userInfo } = state;
+
+  const signOutHandler = () => {
+    ctxDispatch({type:'USER_SIGN_OUT'});
+    localStorage.removeItem('userInfo');
+  }
 
   return (
     <BrowserRouter>
@@ -30,6 +36,24 @@ function App() {
                     <div className='badge'>{cart.cartItems.reduce((a,c) => a + c.quantity,0)}</div>
                   )}
                   </Link>
+                  {userInfo ? (
+                    <>
+                      <Dropdown>
+                      <Dropdown.Toggle variant="none" id="dropdown-basic">
+                        {userInfo.name}
+                      </Dropdown.Toggle>
+                    
+                      <Dropdown.Menu>
+                        <Dropdown.Item href="#/action-1">User History</Dropdown.Item>
+                        <Dropdown.Item href="#/action-2">User Profile</Dropdown.Item>
+                        <Dropdown.Item onClick={signOutHandler} >Sign Out</Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                    </>
+                  ) : (<div className='nav__signin'>
+                    <Link to='/signin'>Autentificare</Link>
+                  </div>)
+                  }
               </div>
             </div>
           </div>

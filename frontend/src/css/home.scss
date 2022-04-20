@@ -18,7 +18,7 @@
             min-width: 25px;
             border: 1px solid #fff;
             height: 24px;
-            left: 35%;
+            left: 50%;
             top: -13px;
             font-size: 14px;
             border-radius: 50%;
@@ -31,6 +31,29 @@
         justify-content: space-between;
         min-height: 100px;
         height: 100%;
+    }
+
+    .menu {
+        display: flex;
+        align-items: center;
+
+        .dropdown .btn {
+            color: #fff;
+            outline: none;
+            font-weight: 400;
+            text-transform: initial;
+            font-size: 20px;
+
+            &:hover, &:focus {
+                outline: none;
+                box-shadow: none;
+            }
+        }
+
+        .nav__signin {
+            font-size: 20px;
+            padding: 6px 12px;
+        }
     }
     
     .logo a {
