@@ -52,7 +52,7 @@ export default function Shipping() {
             <title>Addresa de livrare</title>
         </Helmet>
         <FinishSteps step1 step2 />
-        <h1 className='mb-4'>Addresa de livrare</h1>
+        <h1>Addresa de livrare</h1>
         <Form onSubmit={submitHandler}>
             <Form.Group className="mb-3" controlId="fullname">
                 <Form.Label>Nume complet</Form.Label>

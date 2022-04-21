@@ -11,6 +11,7 @@ import { Store } from './Store';
 import {Dropdown} from 'react-bootstrap';
 import Shipping from './components/Shipping';
 import SignUp from './components/SignUp';
+import PaymentMethod from './components/PaymentMethod';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
     ctxDispatch({type:'USER_SIGN_OUT'});
     localStorage.removeItem('userInfo');
     localStorage.removeItem('shippingAddress');
+    localStorage.removeItem('paymentMethod');
   }
 
   return (
@@ -73,6 +75,7 @@ function App() {
               <Route path='/signin' element={<SingIn/>} />
               <Route path='/signup' element={<SignUp/>} />
               <Route path='/shipping' element={<Shipping />} />
+              <Route path='/payment' element={<PaymentMethod />} />
             </Routes>
           </div>
         </main>

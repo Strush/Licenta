@@ -3,15 +3,6 @@
     padding: 40px;
     border-radius: 3px;
 
-    .form {
-        margin-top: 20px;
-        margin-bottom: 15px;
-
-        div {
-            margin-bottom: 20px;
-        }
-    }
-
     .form-info__user {
         display: flex;
         align-items: center;
@@ -29,5 +20,14 @@
             border: none;
             color: #fff;
         }
+    }
+}
+
+.form {
+    margin-top: 30px;
+    margin-bottom: 15px;
+
+    div {
+        margin-bottom: 20px;
     }
 }
