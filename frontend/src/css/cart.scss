@@ -5,39 +5,14 @@
 
     .cart__body {
 
-        .cart__item {
-            display: flex;
-            align-items: center;
-            column-gap: 20px;
-            padding: 15px 20px;
-            margin-bottom: 20px;
-            box-shadow: $shadow-card;
-        }
-
-        .thumbnail {
-            width: 80px;
-            height: 80px;
-            padding: 5px;
-            display: flex;
-            align-items: center;
-            box-shadow: $shadow-white;
-
-            img {
-                object-fit: contain;
-                height: inherit;
-                width: inherit;
-            }
-        }
+        @include product-list;
 
         .controls {
             display: flex;
             align-items: center;
             margin-left: auto;
-
-            .quantity {
-                font-size: 18px;
-            }
         }
+        
         .icon {
             width: 30px;
             height: 30px;
@@ -48,10 +23,6 @@
         }
 
         .trash {
-            margin-left: auto;
-        }
-        .price {
-            font-size: 18px;
             margin-left: auto;
         }
     }

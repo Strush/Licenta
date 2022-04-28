@@ -9,3 +9,23 @@
     color: $teal;
     font-weight: 600;
   }
+
+  /* Pagina de finalizare */
+  .order {
+    @include product-list;
+
+    .cart__item {
+
+      .quantity {
+        margin-left: auto;
+      }
+
+    }
+
+    .order__sidebar_nav li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+  }

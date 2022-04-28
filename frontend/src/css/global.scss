@@ -25,8 +25,7 @@ img {
 a {
     display: block;
     text-decoration: none;
-    transition: 0.3s ease-in;
-    color: #fff;
+    transition: 0.3s ease-in; 
 
     &:hover {
       color: #fff;
@@ -100,24 +99,10 @@ h1 {
 
 /* buttons */
 .btn {
-  appearance: none;
-  background-color: transparent;
-  cursor: pointer;
-  color: teal;
   width: 100%;
-  font-weight: 600;
   display: flex;
+  text-align: center;
   justify-content: center;
-  align-items: center;
-  height: 40px;
-  border: 2px solid $teal;
-  font-size: 16px;
-  text-transform: uppercase;
-
-  &:hover {
-    color: #fff;
-    outline: 0;
-  }
 }
 
 /* Buttons hover */

@@ -30,3 +30,42 @@
     width: 100%;
     object-fit: cover;
 }
+
+@mixin product-list {
+    .cart__item {
+        display: flex;
+        align-items: center;
+        column-gap: 20px;
+        padding: 15px 20px;
+        margin-bottom: 20px;
+        box-shadow: $shadow-card;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .thumbnail {
+        width: 80px;
+        height: 80px;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        box-shadow: $shadow-white;
+
+        img {
+            object-fit: contain;
+            height: inherit;
+            width: inherit;
+        }
+    }
+
+    .price {
+        font-size: 18px;
+        margin-left: auto;
+    }
+
+    .quantity {
+        font-size: 18px;
+    }
+}

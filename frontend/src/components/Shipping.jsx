@@ -16,7 +16,7 @@ export default function Shipping() {
     const [fullname, setFullName] = useState(shippingAddress.fullname || '');
     const [address, setAddress] = useState(shippingAddress.address || '');
     const [city, setCity] = useState(shippingAddress.city || '');
-    const [postalcode, setPostalCode] = useState(shippingAddress.postalcode || '');
+    const [phoneNumber, SetPhoneNumber] = useState(shippingAddress.phoneNumber || '');
     const [country, setCountry] = useState(shippingAddress.country || '');
 
     useEffect(() => {
@@ -32,7 +32,7 @@ export default function Shipping() {
             fullname,
             address,
             city,
-            postalcode,
+            phoneNumber,
             country
         }});
 
@@ -40,7 +40,7 @@ export default function Shipping() {
             fullname,
             address,
             city,
-            postalcode,
+            phoneNumber,
             country
         }));
         navigate('/payment');
@@ -74,13 +74,13 @@ export default function Shipping() {
                     required 
                 />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="postalcode">
-                <Form.Label>Codul Postal</Form.Label>
+            <Form.Group className="mb-3" controlId="phoneNumber">
+                <Form.Label>Nr.telefon</Form.Label>
                 <Form.Control 
-                    type="text" 
-                    value={postalcode} 
-                    placeholder="ex: 600017" 
-                    onChange={(e) => setPostalCode(e.target.value)} 
+                    type="number" 
+                    value={phoneNumber} 
+                    placeholder="+40 771995324" 
+                    onChange={(e) => SetPhoneNumber(e.target.value)} 
                     required
                 />
             </Form.Group>
