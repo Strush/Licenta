@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import LoadingBox from "../components/LoadingBox";
 import Messagebox from "../components/MessageBox";
 import { Store } from "../Store";
+import { Button } from "react-bootstrap";
 
 // Am creat reducer
 const reducer = (state,action) => {
@@ -77,7 +78,7 @@ function ProductScreen(props){
                                     <p>{product.name}</p>
                                  </Link>
                                 <p className="price"><strong>${product.price}</strong></p>
-                                {(product.countInStock > 0) ? (<button className="btn btn-teal" onClick={() => addToCart(product)}>Adaugă în Coș</button>) : (
+                                {(product.countInStock > 0) ? (<Button className="btn-teal" variant="" onClick={() => addToCart(product)}>Adaugă în Coș</Button>) : (
                                     <button className="btn btn-disable">Stock Epuizat</button>
                                 ) }
 

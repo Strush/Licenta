@@ -6,6 +6,7 @@ import minus from '../images/minus.svg';
 import plus from '../images/plus.svg';
 import trash from '../images/trash.svg';
 import axios from 'axios';
+import { Button } from 'react-bootstrap';
 
 export default function Cart() {
     const navigate = useNavigate();
@@ -79,7 +80,7 @@ export default function Cart() {
                 <div className='cart__checkout'>
                     <div className='quantity'>Cantitatea: <strong>{cartItems.reduce((a,c) => a + c.quantity, 0)}</strong></div>
                     <div className='price'>Pretul: <strong>{cartItems.reduce((a,c) => a + c.price * c.quantity,0)}$</strong></div>
-                    <button className='btn btn-teal' onClick={checkoutHandler}>cumpără</button>
+                    <Button variant="success" onClick={checkoutHandler}>cumpără</Button>
                 </div>
             </>
         ) : (

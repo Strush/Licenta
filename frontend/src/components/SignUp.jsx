@@ -93,7 +93,7 @@ export default function SignUp() {
                         required
                     />
                 </Form.Group>
-                <Button variant="none" type="submit">
+                <Button variant="link" className='btn-teal' type="submit">
                     Înregistrați-vă
                 </Button>
             </Form>

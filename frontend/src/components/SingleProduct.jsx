@@ -7,6 +7,7 @@ import LoadingBox from './LoadingBox';
 import Messagebox from './MessageBox';
 import Rating from './Rating';
 import {Store} from '../Store';
+import { Button } from 'react-bootstrap';
 
 const reducer = (state, action) => {
   switch(action.type) {
@@ -88,7 +89,7 @@ function SingleProduct() {
                 <p>Status:</p>
                 <p className={product.countInStock ? 'bage bage-success' : 'bage bage-danger'}>{product.countInStock ? 'In stock' : 'Unavailable'}</p>
               </div>
-              {product.countInStock ? <button className='btn btn-teal mt-20' onClick={addToCartHandler}>Adaugă în Coș</button> : ''}
+              {product.countInStock ? <Button variant='flush' className='btn-teal mt-20' onClick={addToCartHandler}>Adaugă în Coș</Button> : ''}
             </div>
 
           </div>
