@@ -1,21 +1,45 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useReducer } from 'react';
+import axios from 'axios';
 import { Button, Card, Col, Row } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
 import { Store } from '../Store';
 import FinishSteps from './FinishSteps';
+import { toast } from 'react-toastify';
+import getError from '../utils';
+
+const reducer = (state, action) => {
+    switch(action.type) {
+        case 'ORDER_REQUEST': 
+            return {...state, loading: true};
+        case 'ORDER_SUCCESS': 
+            return {...state, loading: false};
+        case 'ORDER_FAIL': 
+            return {...state, loading: false};
+        default: 
+            return state;
+    }
+}
 
 const Orderscreen = () => {
 
+    // Citesc datele din axaj
+    const [{loading, error}, dispatch] = useReducer(reducer,{
+        loading: false,
+        error: ''
+    });
+
     const navigate = useNavigate();
-    const {state} = useContext(Store);
-    const {cart } = state;
+
+    // Citim din store.js
+    const {state, dispatch: ctxDispatch} = useContext(Store);
+    const {cart,userInfo} = state;
 
     const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100; // 123.2345 => 123.23
     cart.itemsPrice = round2(
         cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
       );
-    const total = (cart.itemsPrice < 200) ?  cart.itemsPrice + 5 : 0;
+    const total = (cart.itemsPrice < 200) ?  cart.itemsPrice + 5 : cart.itemsPrice;
 
     useEffect(() => {
         if(!cart.paymentMethod){
@@ -26,7 +50,35 @@ const Orderscreen = () => {
         }
     }, [cart,navigate]);
 
-    const orderHandler = () => {}
+    // 
+    console.log(state);
+    const orderHandler = async () => {
+
+        try {
+            dispatch({type: 'ORDER_REQUEST'});
+
+            const { data } = await axios.post('/api/orders',{
+                orderItems: cart.cartItems,
+                paymentMethod: cart.paymentMethod,
+                shippingAddress: cart.shippingAddress,
+                totalPrice: cart.itemsPrice,
+                deliveryPrice: 5,
+            }, {
+                headers: {
+                    authorization: `Bearer ${userInfo.token}`,
+                }
+            });
+
+            ctxDispatch({type: 'CART_CLEAR'});
+            dispatch({type: 'ORDER_SUCCESS'});
+            localStorage.removeItem('cartItems');
+            navigate(`/order/${data.order._id}`);
+
+        } catch(err) {
+            dispatch({type: 'ORDER_FAIL'});
+            toast.error(getError(err));
+        }
+    }
 
     return (
         <div className='order'>

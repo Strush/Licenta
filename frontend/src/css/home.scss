@@ -43,6 +43,8 @@
             outline: none;
             font-weight: 400;
             text-transform: initial;
+            display: flex;
+            align-items: center;
             font-size: 20px;
 
             &:hover, &:focus {

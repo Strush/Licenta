@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import seedRouter from "./routes/seedRoutes.js";
 import productRouter from "./routes/productRouter.js";
 import userRouter from "./routes/userRouter.js";
+import orderRouter from "./routes/orderRouter.js";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -29,6 +30,7 @@ app.use(express.urlencoded({extended: true}));
 app.use('/api/products',productRouter);
 
 app.use('/api/users',userRouter);
+app.use('/api/orders',orderRouter);
 
 // ExpressAsyncHandler afisarea erorilor 
 app.use((err,req,res,next) => {

@@ -65,6 +65,9 @@ const reducer = (state, action) => {
                 }
             };
         }
+        case 'CART_CLEAR': {
+            return {...state, cart: {...state.cart, cartItems: []}}
+        }
 
         case 'SAVE_SHIPPING_ADDRESS': {
             return {...state, cart: {
