@@ -13,6 +13,7 @@ import Shipping from './components/Shipping';
 import SignUp from './components/SignUp';
 import PaymentMethod from './components/PaymentMethod';
 import Orderscreen from './components/OrderScreen';
+import OrderDetails from './components/OrderDetails';
 
 function App() {
 
@@ -78,6 +79,7 @@ function App() {
               <Route path='/shipping' element={<Shipping />} />
               <Route path='/payment' element={<PaymentMethod />} />
               <Route path='/placeholder' element={<Orderscreen />} />
+              <Route path='/order/:id' element={<OrderDetails />} />
             </Routes>
           </div>
         </main>

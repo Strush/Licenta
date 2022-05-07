@@ -1,10 +1,11 @@
 import React from 'react';
+import { Alert } from 'react-bootstrap';
 
 const Messagebox = (props) => {
     return (
-        <div className={'message-'+props.variant || 'info'}>
+        <Alert variant={props.variant} className="alert__box py-1 m-0">
             {props.children}
-        </div>
+        </Alert>
     );
 }
 

@@ -78,13 +78,13 @@ function SingleProduct() {
           <div className="product__content">
             <div>          
               <h2 className='title'>{product.name}</h2>
-              <span className='price'>Price: <strong>{product.price}$</strong></span>
+              <span className='price'>Price: <strong>{product.price} lei</strong></span>
                   <Rating rating={product.rating} numReviews={product.numReviews} />
               <p className='description'>{product.description}</p>
             </div>
 
             <div className='product__cart'>
-              <div className='mb-sm'>Price: {product.price}$</div>
+              <div className='mb-sm'>Price: {product.price} lei</div>
               <div className='status'>
                 <p>Status:</p>
                 <p className={product.countInStock ? 'bage bage-success' : 'bage bage-danger'}>{product.countInStock ? 'In stock' : 'Unavailable'}</p>

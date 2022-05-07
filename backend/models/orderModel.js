@@ -31,7 +31,7 @@ const OrderSchema = new mongoose.Schema(
             email_address: String,
         },
         totalPrice: {type: Number, required: true},
-        deliveredPrice: {type: Number},
+        deliveredPrice: {type: Number,required: true},
         isPaid: {type: Boolean, default: false},
         user: {
             type: mongoose.Schema.Types.ObjectId,

@@ -12,12 +12,22 @@ orderRouter.post('/', isAuth, expressAsyncHandler(async (req,res) => {
         paymentMethod: req.body.paymentMethod,
         paymentResults: req.body.paymentResults,
         totalPrice: req.body.totalPrice,
+        deliveredPrice: req.body.deliveredPrice,
         user: req.user._id
     });
     
-    console.log(req.body);
     const order = await newOrder.save();
     res.status(201).send({message: 'New order created', order});
+}));
+
+
+orderRouter.get('/:id', isAuth, expressAsyncHandler(async (req,res) => {
+    const order = await Order.findById(req.params.id);
+    if(order){
+        res.send(order);
+    } else {
+        res.status(404).send({message: 'Order not found'});
+    }
 }));
 
 export default orderRouter;

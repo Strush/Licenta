@@ -77,7 +77,7 @@ function ProductScreen(props){
                                 <Link to={`/product/${product.slug}`} className="name">
                                     <p>{product.name}</p>
                                  </Link>
-                                <p className="price"><strong>${product.price}</strong></p>
+                                <p className="price"><strong>{product.price} lei</strong></p>
                                 {(product.countInStock > 0) ? (<Button className="btn-teal" variant="" onClick={() => addToCart(product)}>Adaugă în Coș</Button>) : (
                                     <button className="btn btn-disable">Stock Epuizat</button>
                                 ) }

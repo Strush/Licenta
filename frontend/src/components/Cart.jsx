@@ -68,7 +68,7 @@ export default function Cart() {
                             </button>
                         </div>
                         <div className='price'>
-                            <p>{item.price}$</p>
+                            <p>{item.price} lei</p>
                         </div>
                         <div className='icon trash ml-10' onClick={() => removeProduct(item)}>
                             <img src={trash} alt="Trash icon" />
@@ -79,7 +79,7 @@ export default function Cart() {
                 {}
                 <div className='cart__checkout'>
                     <div className='quantity'>Cantitatea: <strong>{cartItems.reduce((a,c) => a + c.quantity, 0)}</strong></div>
-                    <div className='price'>Pretul: <strong>{cartItems.reduce((a,c) => a + c.price * c.quantity,0)}$</strong></div>
+                    <div className='price'>Pretul: <strong>{cartItems.reduce((a,c) => a + c.price * c.quantity,0)} lei</strong></div>
                     <Button variant="success" onClick={checkoutHandler}>cumpără</Button>
                 </div>
             </>

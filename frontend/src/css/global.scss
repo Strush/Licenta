@@ -155,14 +155,13 @@ h1 {
   display: flex;
   align-items: center;
 
-  div {
-    margin-left: 5px;
-    cursor: pointer;
-  }
-
   img {
     width: 18px;
   }
+}
+
+.alert__box {
+  display: inline-block;
 }
 
 .message-info {

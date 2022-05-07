@@ -8,6 +8,8 @@ import FinishSteps from './FinishSteps';
 import { toast } from 'react-toastify';
 import getError from '../utils';
 import TooltipInfo from './TooltipInfo';
+import LoadingBox from './LoadingBox';
+import Messagebox from './MessageBox';
 
 const reducer = (state, action) => {
     switch(action.type) {
@@ -40,7 +42,7 @@ const Orderscreen = () => {
     cart.itemsPrice = round2(
         cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
       );
-    const total = (cart.itemsPrice < 200) ?  cart.itemsPrice + 5 : cart.itemsPrice;
+    const total = (cart.itemsPrice < 200) ?  cart.itemsPrice + 20 : cart.itemsPrice;
 
     useEffect(() => {
         if(!cart.paymentMethod){
@@ -51,8 +53,6 @@ const Orderscreen = () => {
         }
     }, [cart,navigate]);
 
-    // 
-    console.log(state);
     const orderHandler = async () => {
 
         try {
@@ -63,7 +63,7 @@ const Orderscreen = () => {
                 paymentMethod: cart.paymentMethod,
                 shippingAddress: cart.shippingAddress,
                 totalPrice: cart.itemsPrice,
-                deliveryPrice: 5,
+                deliveredPrice: (cart.itemsPrice > 200) ? 0 : 20,
             }, {
                 headers: {
                     authorization: `Bearer ${userInfo.token}`,
@@ -82,7 +82,10 @@ const Orderscreen = () => {
     }
 
     return (
-        <div className='order'>
+        loading ? (<LoadingBox />) : 
+        error ? (<Messagebox>{error}</Messagebox>) :
+        (
+<div className='order'>
             <FinishSteps step1 step2 step3 step4 />
             <Helmet>
                 <title>Finalizare Comanda</title>
@@ -122,7 +125,7 @@ const Orderscreen = () => {
                                         </div>
                                         <div className='quantity'>{item.quantity}</div>
                                         <div className='price'>
-                                            <p>{item.price}$</p>
+                                            <p>{item.price} lei</p>
                                         </div>
                                     </div>
                                 ))}
@@ -142,10 +145,10 @@ const Orderscreen = () => {
                                     <p className='tooltip__message'>Livrare:
                                         <TooltipInfo message="Livare gratuita la comenzile mai mari de 200 lei."/> 
                                     </p>
-                                    <strong>{(cart.itemsPrice > 100) ? 'Gratis' : '5$'}</strong>
+                                    <strong>{(cart.itemsPrice > 200) ? 0 : 20} lei</strong>
                                 </li>
                                 <li>
-                                    Total: <strong>{total.toFixed(2)}$</strong>
+                                    Total: <strong>{total.toFixed(2)} lei</strong>
                                 </li>
                             </ul>
                             <Button variant="success" onClick={orderHandler} disabled={cart.cartItems.length === 0}>Plaseaza Comanda</Button>
@@ -154,6 +157,7 @@ const Orderscreen = () => {
                 </Col>
             </Row>
         </div>
+        )
     );
 }
 
