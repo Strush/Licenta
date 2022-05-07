@@ -7,6 +7,7 @@ import { Store } from '../Store';
 import FinishSteps from './FinishSteps';
 import { toast } from 'react-toastify';
 import getError from '../utils';
+import TooltipInfo from './TooltipInfo';
 
 const reducer = (state, action) => {
     switch(action.type) {
@@ -138,7 +139,10 @@ const Orderscreen = () => {
                                     Cantitatea: <strong>{cart.cartItems.reduce((a,c) => a + c.quantity,0)}</strong>
                                 </li>
                                 <li>
-                                    Livrare: <strong>{(cart.itemsPrice > 100) ? 'Gratis' : '5$'}</strong>
+                                    <p className='tooltip__message'>Livrare:
+                                        <TooltipInfo message="Livare gratuita la comenzile mai mari de 200 lei."/> 
+                                    </p>
+                                    <strong>{(cart.itemsPrice > 100) ? 'Gratis' : '5$'}</strong>
                                 </li>
                                 <li>
                                     Total: <strong>{total.toFixed(2)}$</strong>

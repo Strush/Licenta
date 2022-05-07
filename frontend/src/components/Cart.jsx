@@ -53,7 +53,7 @@ export default function Cart() {
                             <Link to={`/product/${item.slug}`} className='title'>{item.name}</Link>
                         </div>
                         <div className='controls'>
-                        <button className='icon mr-10' 
+                            <button className='icon mr-10' 
                                 disabled={item.quantity === 1}
                                 onClick={() => updateCartHandler (item,item.quantity - 1)}
                             >

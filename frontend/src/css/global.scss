@@ -151,6 +151,19 @@ h1 {
   background-color: red;
   @include message;
 }
+.tooltip__message {
+  display: flex;
+  align-items: center;
+
+  div {
+    margin-left: 5px;
+    cursor: pointer;
+  }
+
+  img {
+    width: 18px;
+  }
+}
 
 .message-info {
   background: sandybrown;
