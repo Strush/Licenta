@@ -9,12 +9,12 @@
 
 # Paypal date
 1. Utilizator
- First name: John
- Last name: Doe
- Email ID:sb-g9mtu5047907@personal.example.com
- System Generated Password: Up^6FQBM
+2. First name: John
+3. Last name: Doe
+4. Email ID:sb-g9mtu5047907@personal.example.com
+5. System Generated Password: Up^6FQBM
 
 # Credit Card
- Credit Card Number: 4032031905597919
- Credit Card Type: VISA
- Expiration Date: 03/2026
+1. Credit Card Number: 4032031905597919
+2. Credit Card Type: VISA
+3. Expiration Date: 03/2026
