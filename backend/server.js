@@ -32,6 +32,11 @@ app.use('/api/products',productRouter);
 app.use('/api/users',userRouter);
 app.use('/api/orders',orderRouter);
 
+// Se transmite PAYPAL_CLIENT_IT in frontent
+app.use('/api/keys/paypal',(req,res) => {
+    res.send(process.env.PAYPAL_CLINT_ID || 'sb'); // sb => standart sandbox
+});
+
 // ExpressAsyncHandler afisarea erorilor 
 app.use((err,req,res,next) => {
     res.status(500).send({message: err.message});

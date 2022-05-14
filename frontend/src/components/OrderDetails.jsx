@@ -3,11 +3,13 @@ import React, { useContext, useEffect, useReducer } from 'react'
 import { Button, Card, Col, Row } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async'
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import { Store } from '../Store';
 import getError from '../utils';
 import LoadingBox from './LoadingBox';
 import Messagebox from './MessageBox';
 import TooltipInfo from './TooltipInfo';
+import { toast } from 'react-toastify';
 
 const reducer = (state,action) => {
     switch(action.type) {
@@ -17,6 +19,16 @@ const reducer = (state,action) => {
             return {...state, loading: false, order: action.payload, error: ''};
         case 'FETCH_FAIL':
             return {...state, loading: false, error: action.payload};
+
+        case 'PAY_REQUEST':
+            return {...state, loadingPay: true}
+        case 'PAY_SUCCESS':
+            return {...state, loadingPay: false, successPay: true}
+        case 'PAY_FAIL': 
+            return {...state, loadingPay: false}
+        case 'PAY_RESET':
+            return {...state, loadingPay: false, successPay: false}
+        
         default: 
             return state;  
     }
@@ -31,9 +43,14 @@ function OrderDetails() {
     const params = useParams();
     const {id: orderId } = params;
 
-    const [{loading, error, order}, dispatch] = useReducer(reducer, {
+    // isPending default este false
+    const [{isPending}, paypalDispatch] = usePayPalScriptReducer();
+
+    const [{loading, error, order,successPay,loadingPay}, dispatch] = useReducer(reducer, {
         loading: true,
         order: {},
+        successPay: false,
+        loadingPay: false,
         error: '',
     });
 
@@ -58,12 +75,72 @@ function OrderDetails() {
             return navigate('/login');
         }
 
-        if (!order._id || (order._id && order._id !== orderId)) {
+        if (!order._id || successPay || (order._id && order._id !== orderId)) {
             fetchData();
+            if(successPay){
+                dispatch({type: 'PAY_RESET'});
+            }
+        } else {
+            const paidOrder = async () => {
+
+                // Se citeste PAYPAL_CLIEND_ID din backend
+                const {data: clientId} = await axios.get('/api/keys/paypal', {
+                    headers: {
+                        authorization: `Bearer ${userInfo.token}`
+                    }
+                });
+
+                // Se reseteaza optiunile default pentru paypal
+                if(clientId){
+                    paypalDispatch({
+                        type: 'resetOptions', 
+                        value: {
+                            'client-id': clientId,
+                            'currency': 'USD'
+                        }
+                    });
+
+                    paypalDispatch({type: 'setLoadingStatus', value: 'pending'});
+                } else {
+                    toast.error('Nu exsita asa cliet ID in paypal');
+                }
+            }
+
+            paidOrder();
         }
 
-    },[order,userInfo,orderId,navigate]);
-    console.log(order);
+    },[order,userInfo,orderId,navigate,paypalDispatch,successPay]);
+
+    const createOrder = (data,actions) => {
+        return actions.order.create({
+            purchase_units: [
+                {
+                    amount: {value: order.totalPrice}
+                }
+            ],
+        }).then((orderId) => {
+            return orderId;
+        });
+    }
+
+    const onApprove = (data, actions) => {
+        return actions.order.capture().then(async function (details){
+            try {
+                dispatch({type: 'PAY_REQUEST'});
+                const {data} = await axios.put(`/api/orders/${orderId}/pay`, details, {
+                    headers: {authorization: `Bearer ${userInfo.token}`},
+                });
+                dispatch({type: 'PAY_SUCCESS', payload: data});
+                toast.success('Comanda a fost platita cu success!');
+            } catch (err){
+                dispatch({type: 'PAY_FAIL', payload: getError(err)})
+                toast.error(getError(err));
+            }
+        });
+    }
+    const onError = (err) => {
+        toast.error(getError(err));
+    }
 
     return loading ? (<LoadingBox></LoadingBox>) : 
         error ? (<Messagebox variant="danger">{error}</Messagebox>) : 
@@ -102,7 +179,7 @@ function OrderDetails() {
                                 <div>
                                     <strong>Status achitare: </strong>
                                     {order.isPaid 
-                                    ? (<Messagebox variant="success">Achitat</Messagebox>) 
+                                    ? (<Messagebox variant="success">Achitat: {order.paidAt}</Messagebox>) 
                                     : (<Messagebox variant="danger">Neachitat</Messagebox>)}
                                 </div>
                             </Card.Body>
@@ -146,7 +223,20 @@ function OrderDetails() {
                                     Total: <strong>{order.totalPrice}$</strong>
                                 </li>
                             </ul>
-                            <Button variant="success">Plaseaza Comanda</Button>
+                            {!order.isPaid && (
+                                <div>
+                                    {isPending ? (<LoadingBox/>) : (
+                                    <div>
+                                        <PayPalButtons 
+                                            createOrder={createOrder}
+                                            onApprove={onApprove}
+                                            onError={onError}
+                                        />
+                                    </div>
+                                    )}
+                                    {loadingPay && <LoadingBox />}
+                                </div>
+                            )}
                         </Card.Body>
                         </Card>
                     </Col>
