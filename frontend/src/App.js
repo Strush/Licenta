@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import { Helmet } from 'react-helmet-async';
 import {BrowserRouter, Link, Route, Routes} from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -7,26 +6,16 @@ import Cart from './components/Cart';
 import SingIn from './components/SingIn';
 import SingleProduct from './components/SingleProduct';
 import FrontPage from './screens/FrontPage';
-import { Store } from './Store';
-import {Dropdown} from 'react-bootstrap';
 import Shipping from './components/Shipping';
 import SignUp from './components/SignUp';
 import PaymentMethod from './components/PaymentMethod';
 import Orderscreen from './components/OrderScreen';
 import OrderDetails from './components/OrderDetails';
+import OrderHistory from './components/OrderHistory';
+import Header from './components/Header';
 
 function App() {
-
-  const {state, dispatch: ctxDispatch} = useContext(Store);
-  const { cart, userInfo } = state;
-
-  const signOutHandler = () => {
-    ctxDispatch({type:'USER_SIGN_OUT'});
-    localStorage.removeItem('userInfo');
-    localStorage.removeItem('shippingAddress');
-    localStorage.removeItem('paymentMethod');
-  }
-
+  
   return (
     <BrowserRouter>
     <div className="App">
@@ -34,40 +23,7 @@ function App() {
         <Helmet>
           <title>Eoomi</title>
         </Helmet>  
-        <header className="header">
-          <div className="container">
-            <div className="nav">
-              <div className='logo'>
-                <Link to='/'>Eoomi</Link>
-              </div>
-              <div className='menu'>
-                  <Link className='cart' to={'/cart'}>Coș
-                  {cart.cartItems.length > 0 && (
-                    <div className='badge'>{cart.cartItems.reduce((a,c) => a + c.quantity,0)}</div>
-                  )}
-                  </Link>
-                  {userInfo ? (
-                    <>
-                      <Dropdown>
-                      <Dropdown.Toggle variant="none" id="dropdown-basic">
-                        {userInfo.name}
-                      </Dropdown.Toggle>
-                    
-                      <Dropdown.Menu>
-                        <Dropdown.Item href="#/action-1">User History</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">User Profile</Dropdown.Item>
-                        <Dropdown.Item onClick={signOutHandler} >Sign Out</Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                    </>
-                  ) : (<div className='nav__signin'>
-                    <Link to='/signin'>Autentificare</Link>
-                  </div>)
-                  }
-              </div>
-            </div>
-          </div>
-        </header>
+        <Header />
         <main>
           <div className="container">
             <Routes>
@@ -79,6 +35,7 @@ function App() {
               <Route path='/shipping' element={<Shipping />} />
               <Route path='/payment' element={<PaymentMethod />} />
               <Route path='/placeholder' element={<Orderscreen />} />
+              <Route path='/orderhistory' element={<OrderHistory />} />
               <Route path='/order/:id' element={<OrderDetails />} />
             </Routes>
           </div>
