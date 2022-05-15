@@ -13,6 +13,7 @@ import Orderscreen from './components/OrderScreen';
 import OrderDetails from './components/OrderDetails';
 import OrderHistory from './components/OrderHistory';
 import Header from './components/Header';
+import UserProfile from './screens/UserProfile';
 
 function App() {
   
@@ -36,6 +37,7 @@ function App() {
               <Route path='/payment' element={<PaymentMethod />} />
               <Route path='/placeholder' element={<Orderscreen />} />
               <Route path='/orderhistory' element={<OrderHistory />} />
+              <Route path='/users/profile' element={<UserProfile />} />
               <Route path='/order/:id' element={<OrderDetails />} />
             </Routes>
           </div>

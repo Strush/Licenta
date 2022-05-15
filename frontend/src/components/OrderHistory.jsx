@@ -16,6 +16,8 @@ const reducer = (state, action) => {
 			return {...state, orders: action.payload, loading: false}
 		case 'FETCH_FAIL':
 			return {...state, error: action.payload, loading: false}
+		default: 
+		return state;
 	}
 }
 
@@ -66,7 +68,7 @@ export default function OrderHistory() {
 					</thead>
 					<tbody>
 							{orders.map((item,index) => (
-								<tr>
+								<tr key={item._id}>
 									<td>{index}</td>
 									<td>{item._id}</td>
 									<td>{item.createdAt.substring(0, 10)}</td>

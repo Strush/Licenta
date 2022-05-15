@@ -1,5 +1,5 @@
 import express from "express";
-import {generateToken} from "../utils.js";
+import {generateToken, isAuth} from "../utils.js";
 import expressAsyncHandler from 'express-async-handler';
 import User from "../models/userModal.js";
 import bcrypt from 'bcryptjs';
@@ -41,6 +41,28 @@ userRouter.post('/signup', expressAsyncHandler(async (req,res) => {
         token: generateToken(user),
     });
 
-}))
+}));
+
+userRouter.put('/profile', isAuth, expressAsyncHandler(async (req,res) => {
+    const user = await User.findById(req.user._id);
+    if(user) {
+        user.name = req.body.name;
+        user.email = req.body.email;
+        if(req.body.password){
+            user.password = bcrypt.hashSync(req.body.password, 8);
+        }
+
+        const updateUser = await user.save();
+        res.send({
+            _id: updateUser._id,
+            name: updateUser.name,
+            email: updateUser.email,
+            isAdmin: updateUser.isAdmin,
+            token: generateToken(updateUser)
+        });
+    } else { 
+        res.status(404).send({message: 'Nu exista asa utilizator'});
+    }
+}));
 
 export default userRouter;

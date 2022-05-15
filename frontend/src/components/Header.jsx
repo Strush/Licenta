@@ -36,7 +36,7 @@ export default function Header() {
                             <LinkContainer to="/orderhistory">
                                 <NavDropdown.Item>Order History</NavDropdown.Item>
                             </LinkContainer>
-                            <LinkContainer to="/#">
+                            <LinkContainer to="/users/profile">
                                 <NavDropdown.Item>User Profile</NavDropdown.Item>
                             </LinkContainer>
                             <LinkContainer to="/#signout">
