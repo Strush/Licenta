@@ -3,7 +3,7 @@ import { Button, Form } from 'react-bootstrap'
 import { Helmet } from 'react-helmet-async'
 import { useNavigate } from 'react-router-dom';
 import { Store } from '../Store';
-import FinishSteps from './FinishSteps';
+import FinishSteps from '../components/FinishSteps';
 
 export default function Shipping() {
     const navigate = useNavigate();

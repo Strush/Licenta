@@ -4,12 +4,12 @@ import { Button, Card, Col, Row } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
 import { Store } from '../Store';
-import FinishSteps from './FinishSteps';
+import FinishSteps from '../components/FinishSteps';
 import { toast } from 'react-toastify';
 import getError from '../utils';
-import TooltipInfo from './TooltipInfo';
-import LoadingBox from './LoadingBox';
-import Messagebox from './MessageBox';
+import LoadingBox from '../components/LoadingBox';
+import Messagebox from '../components/MessageBox';
+import TooltipInfo from '../components/TooltipInfo';
 
 const reducer = (state, action) => {
     switch(action.type) {

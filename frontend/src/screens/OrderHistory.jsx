@@ -5,8 +5,8 @@ import { Helmet } from 'react-helmet-async'
 import { useNavigate } from 'react-router-dom';
 import { Store } from '../Store';
 import getError from '../utils';
-import LoadingBox from './LoadingBox';
-import Messagebox from './MessageBox';
+import LoadingBox from '../components/LoadingBox';
+import Messagebox from '../components/MessageBox';
 
 const reducer = (state, action) => {
 	switch(action.type) {

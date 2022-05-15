@@ -1,14 +1,14 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useReducer } from 'react'
-import { Button, Card, Col, Row } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import { Store } from '../Store';
 import getError from '../utils';
-import LoadingBox from './LoadingBox';
-import Messagebox from './MessageBox';
-import TooltipInfo from './TooltipInfo';
+import LoadingBox from '../components/LoadingBox';
+import Messagebox from '../components/MessageBox';
+import TooltipInfo from '../components/TooltipInfo';
 import { toast } from 'react-toastify';
 
 const reducer = (state,action) => {
@@ -142,7 +142,7 @@ function OrderDetails() {
         toast.error(getError(err));
     }
 
-    return loading ? (<LoadingBox></LoadingBox>) : 
+    return loading ? (<LoadingBox />) : 
         error ? (<Messagebox variant="danger">{error}</Messagebox>) : 
         (
             <div className='order'>

@@ -3,9 +3,9 @@ import React, { useContext, useEffect, useReducer } from 'react'
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import getError from '../utils';
-import LoadingBox from './LoadingBox';
-import Messagebox from './MessageBox';
-import Rating from './Rating';
+import LoadingBox from '../components/LoadingBox';
+import Messagebox from '../components/MessageBox';
+import Rating from '../components/Rating';
 import {Store} from '../Store';
 import { Button } from 'react-bootstrap';
 
