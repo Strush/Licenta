@@ -4,12 +4,7 @@
     box-sizing: border-box;
   }
 
-/* Reset default style */
-
-body {
-    font-family: $ms-regular;
-  }
-  
+// Default style
 .small-container {
   max-width: 600px;
   margin-left: auto;
@@ -17,26 +12,19 @@ body {
 }
     
 img {
-    max-width: 100%;
-    vertical-align: inherit;
-    height: auto;
+  max-width: 100%;
+  vertical-align: inherit;
+  height: auto;
+}
+
+p,span {
+  margin: 0;
+  padding: 0;
 }
 
 a {
-    display: block;
-    text-decoration: none;
-    transition: 0.3s ease-in; 
-
-    &:hover {
-      color: #fff;
-      transition: 0.3s ease-in;
-
-    }
-}
-
-p {
-  margin: 0;
-  padding: 0;
+  display: block;
+  text-decoration: none;
 }
 
 ul,ol,li {
@@ -45,132 +33,116 @@ ul,ol,li {
   margin: 0;
 }
 
-button {
-  border: none;
-}
-
-button:disabled,
-button[disabled]{
-  opacity: 0.5;
-}
-
-h1 {
-  font-size: 35px;
-  line-height: 45px;
-}
-
 /* Custom clases */
-.block {
-  display: block;
-}
+// .block {
+//   display: block;
+// }
 
-.mb-xs {
-  margin-bottom: $xs;
-}
+// .mb-20 {
+//   margin-bottom: 20px;
+// }
 
-.mb-20 {
-  margin-bottom: 20px;
-}
+// .mt-20 {
+//   margin-top: 20px;
+// }
 
-.mt-20 {
-  margin-top: 20px;
-}
+// .ml-10 {
+//   margin-left: 10px;
+// }
+// .mr-10 {
+//   margin-right: 10px;
+// }
 
-.ml-10 {
-  margin-left: 10px;
-}
-.mr-10 {
-  margin-right: 10px;
-}
-
-.mb-30 {
-  margin-bottom: 30px;
-}
+// .mb-30 {
+//   margin-bottom: 30px;
+// }
 
 /* Spinner*/
-.loading-box {
-  width: 80px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: transparent;
-}
+// .loading-box {
+//   width: 80px;
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   background: transparent;
+// }
 
 /* buttons */
-.btn {
-  width: 100%;
-  display: flex;
-  text-align: center;
-  justify-content: center;
-}
+// .btn {
+//   width: 100%;
+//   display: flex;
+//   text-align: center;
+//   justify-content: center;
+// }
 
 /* Buttons hover */
-.btn-teal {
-  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
-  background-color: $teal;
-  text-decoration: none;
-  color: #fff;
-  &:hover {
-    color: #fff;
-    height: inherit;
-  }
-}
+// .btn-teal {
+//   transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+//   background-color: $teal;
+//   text-decoration: none;
+//   color: #fff;
+//   &:hover {
+//     color: #fff;
+//     height: inherit;
+//   }
+// }
 
-.btn-disable {
-  pointer-events: none;
-  color: #ccc;
-  border: 2px solid #ccc;
-}
+// .btn-disable {
+//   pointer-events: none;
+//   color: #ccc;
+//   border: 2px solid #ccc;
+// }
+
 /* container */
-.container {
-    max-width: 1200px;
-    display: block;
-    margin: 0 auto;
-    padding-left: 15px;
-    padding-right: 15px;
-}
+// .container {
+//     max-width: 1200px;
+//     display: block;
+//     margin: 0 auto;
+//     padding-left: 15px;
+//     padding-right: 15px;
+// }
 
 /* Bage */
-.bage {
-  padding: 5px 7px;
-  border-radius: 3px;
-  width: max-content;
-}
+// .bage {
+//   padding: 5px 7px;
+//   border-radius: 3px;
+//   width: max-content;
+// }
 
-.bage-success {
-  background-color: lawngreen;
-}
+// .bage-success {
+//   background-color: lawngreen;
+// }
 
-.bage-danger {
-  background-color: red;
-}
+// .bage-danger {
+//   background-color: red;
+// }
 
 /* Messages */
-.message-danger {
-  background-color: red;
-  @include message;
-}
-.tooltip__message {
-  display: flex;
-  align-items: center;
+// .message-danger {
+//   background-color: red;
+//   @include message;
+// }
 
-  img {
-    width: 18px;
-    margin-left: 5px;
-  }
-}
+// .tooltip__message {
+//   display: flex;
+//   align-items: center;
 
-.alert__box {
-  display: inline-block;
-}
+//   img {
+//     width: 18px;
+//     margin-left: 5px;
+//   }
+// }
 
-.message-info {
-  background: sandybrown;
-  @include message;
-}
+// .alert__box {
+//   display: inline-block;
+// }
 
-.message-success {
-  background: limegreen;
-  @include message;
-}
+// .message-info {
+//   background: sandybrown;
+//   @include message;
+// }
+
+// .message-success {
+//   background: limegreen;
+//   @include message;
+// }

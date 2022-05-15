@@ -1,73 +1,38 @@
 /* Header */
-.header,.footer {
-    background-color: $teal;
-}   
-
 .header {
-    .cart {
-        color: #fff;
-        font-size: 20px;
-        position: relative;
-        font-weight: 500;
-        cursor: pointer;
-        padding-right: 20px;
+	background-color: #fff;
+	box-shadow: $shadow-bottom;
 
-        .badge {
-            position: absolute;
-            background: red;
-            max-width: 25px;
-            width: 100%;
-            border: 1px solid #fff;
-            height: 24px;
-            left: 50%;
-            top: -13px;
-            font-size: 14px;
-            border-radius: 50%;
-            @include flex-center;
-        }
-    }
-    .nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        min-height: 100px;
-        height: 100%;
-    }
+	.logo a {
+		font-size: 35px;
+		font-feature-settings: "unic";
+		font-variant: unicase;
+	}
 
-    .menu {
-        display: flex;
-        align-items: center;
+	.navbar {
+		padding-top: 15px;
+		padding-bottom: 15px;
 
-        .dropdown .btn {
-            color: #fff;
-            outline: none;
-            font-weight: 400;
-            text-transform: initial;
-            display: flex;
-            align-items: center;
-            font-size: 20px;
+		.dropdown-toggle, 
+		.nav__signin {
+			padding: 0;
+			color: $blue;
+			font-size: 18px;
+		}
+	}
 
-            &:hover, &:focus {
-                outline: none;
-                box-shadow: none;
-            }
-        }
+	.cart {
+		font-size: 20px;
+    	margin-right: 30px;
+	}
 
-        .nav__signin {
-            font-size: 20px;
-            padding: 6px 12px;
-        }
-    }
-    
-    .logo a {
-        @include logo;
-    }
 }
 
-/* Main */
+// /* Main */
 main {
     padding: 60px 0;
     min-height: 70vh;
+	box-shadow: $shadow-bottom;
 }
 
 /* Products */
@@ -81,7 +46,7 @@ main {
 
         .thumbnail {
             background-color: #fff;
-            height: 220px;
+            height: 250px;
             box-shadow: rgb(33 35 38 / 10%) 0px 10px 10px -10px;
 
             img {
@@ -94,38 +59,43 @@ main {
         
         .content {
             padding: 20px;
+			text-align: center;
         }
 
         .name {
-            margin-bottom: 16px;
+            margin-bottom: 15px;
             color: $black;
             font-weight: 600;
         }
         
         .price {
-            text-align: right;
-            margin-bottom: 16px;
+            margin-bottom: 15px;
         }
     }
-
 }
   
 
 /* Footer */
 .footer {
-    padding: 25px 0;
+	padding: 25px 0;
 
-    .footer__log a {
-        @include logo;
-    }
+	.footer__log a {
+		font-size: 35px;
+    font-feature-settings: "unic";
+    font-variant: unicase;
+	}
 
-    .content {
-        @include flex-between;
-    }
+	.content {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		row-gap: 10px;
+		column-gap: 15px;
+	}
 
-    .copyright {
-        color: #fff;
-        font-size: 18px;
-    }
+	.copyright {
+		color: $blue;
+		font-size: 18px;
+	}
 }
-// to do

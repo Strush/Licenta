@@ -14,6 +14,8 @@ import OrderDetails from './screens/OrderDetails';
 import OrderHistory from './screens/OrderHistory';
 import Header from './components/Header';
 import UserProfile from './screens/UserProfile';
+import { Container } from 'react-bootstrap';
+import Footer from './components/Footer';
 
 function App() {
   
@@ -29,7 +31,7 @@ function App() {
           <div className="container">
             <Routes>
               <Route path='/' element={<FrontPage />} />
-              <Route path='/product/:slug' element={<SingleProduct/>} />
+              {/* <Route path='/product/:slug' element={<SingleProduct/>} />
               <Route path='/cart' element={<Cart/>} />
               <Route path='/signin' element={<SingIn/>} />
               <Route path='/signup' element={<SignUp/>} />
@@ -38,22 +40,11 @@ function App() {
               <Route path='/placeholder' element={<Orderscreen />} />
               <Route path='/orderhistory' element={<OrderHistory />} />
               <Route path='/users/profile' element={<UserProfile />} />
-              <Route path='/order/:id' element={<OrderDetails />} />
+              <Route path='/order/:id' element={<OrderDetails />} /> */}
             </Routes>
           </div>
         </main>
-        <footer className='footer'>
-          <div className='container'>
-            <div className='content'>
-            <div className='footer__log'>
-              <Link to='/'>Eoomi</Link>
-            </div>
-            <div className='footer__nav'>
-              <p className='copyright'>Eoomi &copy;, Toate drepturile au fost rezervate.</p>
-            </div>
-            </div>
-          </div>
-        </footer>
+        <Footer />
     </div>
     </BrowserRouter>
   );

@@ -29,9 +29,7 @@ function ProductScreen(props){
     });
 
     const {state, dispatch: ctxContext}  = useContext(Store);
-    const {
-        cart: {cartItems}
-    } = state;
+    const {cart: {cartItems}} = state;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -78,10 +76,9 @@ function ProductScreen(props){
                                     <p>{product.name}</p>
                                  </Link>
                                 <p className="price"><strong>{product.price} lei</strong></p>
-                                {(product.countInStock > 0) ? (<Button className="btn-teal" variant="" onClick={() => addToCart(product)}>Adaugă în Coș</Button>) : (
-                                    <button className="btn btn-disable">Stock Epuizat</button>
+                                {(product.countInStock > 0) ? (<Button variant="primary" className="w-100" onClick={() => addToCart(product)}>Adaugă în Coș</Button>) : (
+                                    <Button variant="light" className="w-100" disabled>Stock Epuizat</Button>
                                 ) }
-
                             </div>
                         </div>
                     ))

@@ -22,11 +22,34 @@
     font-family: montserrat-bold;
     src: url('../fonts/Montserrat-Bold.ttf') format('ttf');
   }
-  
 
-  /* a class title */
-  a.title {
-    font-size: 16px;
-    line-height: 26px;
-    color: teal;
-  }
+body {
+  font-family: monserat-regular;
+}
+
+h1 {
+  font-size: 35px;
+  line-height: 45px;
+  font-weight: 700;
+}
+h2 {
+  font-size: 30px;
+  line-height: 40px;
+}
+h3 {
+  font-size: 25px;
+  line-height: 35px;
+}
+h4, h5 {
+  font-size: 20px;
+  line-height: 30px;
+}
+
+a {
+  color: #0d6efd;
+}
+
+p {
+  font-size: 18px;
+  line-height: 26px;
+}
