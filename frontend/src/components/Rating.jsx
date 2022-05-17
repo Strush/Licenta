@@ -48,7 +48,7 @@ function Rating(props) {
                     : 'far fa-star'
                 } />
             </span>
-            <p className="num-reviews"> Number reviews: <strong>{numReviews}</strong></p>
+            <p className="num-reviews">Număr recenzii: <strong>{numReviews}</strong></p>
         </div>
     );
 }

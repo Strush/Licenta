@@ -7,7 +7,7 @@ import LoadingBox from '../components/LoadingBox';
 import Messagebox from '../components/MessageBox';
 import Rating from '../components/Rating';
 import {Store} from '../Store';
-import { Button } from 'react-bootstrap';
+import { Badge, Button } from 'react-bootstrap';
 
 const reducer = (state, action) => {
   switch(action.type) {
@@ -75,23 +75,27 @@ function SingleProduct() {
           <Helmet>
             <title>{product.name}</title>
           </Helmet>    
-          <div className="product__content">
-            <div>          
-              <h2 className='title'>{product.name}</h2>
-              <span className='price'>Price: <strong>{product.price} lei</strong></span>
-                  <Rating rating={product.rating} numReviews={product.numReviews} />
-              <p className='description'>{product.description}</p>
-            </div>
-
-            <div className='product__cart'>
-              <div className='mb-sm'>Price: {product.price} lei</div>
-              <div className='status'>
-                <p>Status:</p>
-                <p className={product.countInStock ? 'bage bage-success' : 'bage bage-danger'}>{product.countInStock ? 'In stock' : 'Unavailable'}</p>
+          <div className='px-3 px-lg-0'>
+            <div className='product__content'>
+              <div>          
+                <h2 className='title mb-3'>{product.name}</h2>
+                <h4 className='price mb-3'>Pretul: <strong>{product.price} lei</strong></h4>
+                  <div className='rating-box'>
+                    <Rating rating={product.rating} numReviews={product.numReviews} />
+                  </div>
               </div>
-              {product.countInStock ? <Button variant='flush' className='btn-teal mt-20' onClick={addToCartHandler}>Adaugă în Coș</Button> : ''}
+              <div className='product__cart'>
+                <h5 className='mb-3 item-flex'>Pretul: <strong>{product.price}lei</strong></h5>
+                <div className='status item-flex w-full'>
+                  <h5>Status:</h5>
+                  <h5>
+                    <Badge bg={product.countInStock ? 'success' : 'danger'} className='p-2 p-lg-2'>{product.countInStock ? 'In stock' : 'Indisponibil'}</Badge>
+                  </h5>
+                </div>
+                {product.countInStock ? <Button variant='primary' className='w-100 text-center mt-3' onClick={addToCartHandler}>Adaugă în Coș</Button> : ''}
+              </div>
             </div>
-
+            <p className='description mt-3'><strong>Descriere:</strong> {product.description}</p>
           </div>
         </div>
         )
