@@ -53,34 +53,34 @@ export default function Cart() {
                             <Link to={`/product/${item.slug}`} className='title'>{item.name}</Link>
                         </div>
                         <div className='controls'>
-                            <button className='icon mr-10' 
+                            <Button variant='light' className='icon mr-8' 
                                 disabled={item.quantity === 1}
                                 onClick={() => updateCartHandler (item,item.quantity - 1)}
                             >
                                 <img src={minus} alt="Minus icon" />
-                            </button>
+                            </Button>
                             <div className='quantity'>{item.quantity}</div>
-                            <button className='icon ml-10' 
+                            <Button variant='light' className='icon ml-8' 
                                 disabled={item.quantity === item.countInStock}
                                 onClick={() => updateCartHandler (item,item.quantity + 1)}
                             >
                                 <img src={plus} alt="Plus icon" />
-                            </button>
+                            </Button>
                         </div>
                         <div className='price'>
                             <p>{item.price} lei</p>
                         </div>
-                        <div className='icon trash ml-10' onClick={() => removeProduct(item)}>
+                        <Button variant='light' className='icon trash' onClick={() => removeProduct(item)}>
                             <img src={trash} alt="Trash icon" />
-                        </div>
+                        </Button>
                     </div>
                 ))}
                 </div>
                 {}
                 <div className='cart__checkout'>
-                    <div className='quantity'>Cantitatea: <strong>{cartItems.reduce((a,c) => a + c.quantity, 0)}</strong></div>
-                    <div className='price'>Pretul: <strong>{cartItems.reduce((a,c) => a + c.price * c.quantity,0)} lei</strong></div>
-                    <Button variant="success" onClick={checkoutHandler}>cumpără</Button>
+                    <div className='quantity mb-3 mb-sm-4'>Cantitatea: <strong>{cartItems.reduce((a,c) => a + c.quantity, 0)}</strong></div>
+                    <div className='price mb-3 mb-sm-4'>Pretul: <strong>{cartItems.reduce((a,c) => a + c.price * c.quantity,0)} lei</strong></div>
+                    <Button variant="primary w-100" onClick={checkoutHandler}>Cumpără</Button>
                 </div>
             </>
         ) : (
