@@ -26,7 +26,7 @@ export default function SignUp() {
         e.preventDefault();
         
         if(password !== confirmPassword){
-            toast.error('Parolele indroduse nu sunt la fel');
+            toast.error('Parolele indroduse nu sunt coincid');
             return;
         }
 
@@ -57,9 +57,9 @@ export default function SignUp() {
             <Helmet>
                 <title>Înregistrați-vă</title>
             </Helmet>
-            <h1 className='mb-4'>Înregistrați-vă</h1>
+            <h1 className='mb-4 text-center'>Înregistrați-vă</h1>
             <Form onSubmit={submitHandler} className="form">
-                <Form.Group controlId="name">
+                <Form.Group controlId="name" className='mb-3 mb-sm-4'>
                     <Form.Label>Nume</Form.Label>
                     <Form.Control 
                         type="text" 
@@ -68,7 +68,7 @@ export default function SignUp() {
                         required
                     />
                 </Form.Group>
-                <Form.Group controlId="email">
+                <Form.Group controlId="email" className='mb-3 mb-sm-4'>
                     <Form.Label>Email</Form.Label>
                     <Form.Control 
                         type="email" 
@@ -77,7 +77,7 @@ export default function SignUp() {
                         required 
                     />
                 </Form.Group>
-                <Form.Group controlId="password">
+                <Form.Group controlId="password" className='mb-3 mb-sm-4'>
                     <Form.Label>Parola</Form.Label>
                     <Form.Control 
                         type="password" 
@@ -85,7 +85,7 @@ export default function SignUp() {
                         required
                     />
                 </Form.Group>
-                <Form.Group controlId="confirmPassword" className='pb-1'>
+                <Form.Group controlId="confirmPassword" className='mb-3 mb-sm-4'>
                     <Form.Label>Confirmă parola</Form.Label>
                     <Form.Control 
                         type="password" 
@@ -93,7 +93,7 @@ export default function SignUp() {
                         required
                     />
                 </Form.Group>
-                <Button variant="link" className='btn-teal' type="submit">
+                <Button variant="primary" className='mb-2 w-100' type="submit">
                     Înregistrați-vă
                 </Button>
             </Form>
