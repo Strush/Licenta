@@ -45,9 +45,9 @@ export default function SingIn() {
   return (
     <div className='signin small-container'>
       <Helmet>Autentificare</Helmet>
-      <h1 className='title'>Autentificare</h1>
+      <h1 className='title mb-4 text-center'>Autentificare</h1>
       <Form onSubmit={submitForm} className="form form--signin">
-        <Form.Group controlId="email">
+        <Form.Group controlId="email" className='mb-3 mb-sm-4'>
           <Form.Label>Email</Form.Label>
           <Form.Control 
               name="email" 
@@ -57,7 +57,7 @@ export default function SingIn() {
               required 
           />
         </Form.Group>
-        <Form.Group controlId="password" className='pb-1'>
+        <Form.Group controlId="password" className='mb-3 mb-sm-4'>
           <Form.Label>Password</Form.Label>
           <Form.Control 
               name="password" 
@@ -66,11 +66,11 @@ export default function SingIn() {
               required 
           />
         </Form.Group>
-        <Button variant="" className='btn-teal' type="submit">Autentificare</Button>
+        <Button variant="primary w-100 mb-2" type="submit">Autentificare</Button>
       </Form>
       <div className='form-info__user'>
           <p>Sunteți utilizator nou,</p>
-          <Link to={`/signup?redirect=${redirect}`}> Creați-vă un cont.</Link>
+          <Link to={`/signup?redirect=${redirect}`}>Creați-vă un cont.</Link>
       </div>
     </div>
   )

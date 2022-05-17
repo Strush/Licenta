@@ -213,6 +213,20 @@
 			}
 		}
 	}
+
+	/* Form */
+	.signin {
+		padding: 20px;
+
+		.title {
+			font-size: 30px;
+		}
+	}
+	.form {
+		.form-label {
+			font-size: 16px;
+		}
+	}
 }
 
 @media only screen and (max-width: 400px) {

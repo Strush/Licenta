@@ -6,28 +6,19 @@
     .form-info__user {
         display: flex;
         align-items: center;
-
-        a {
-            margin-left: 5px;
-            color: $orange;
-        }
-    }
-
-    .btn {
-        &:hover, &:focus {
-            background-color: $teal;
-            outline: none;
-            border: none;
-            color: #fff;
-        }
     }
 }
-
 .form {
-    margin-top: 30px;
-    margin-bottom: 15px;
+    .form-label {
+        font-size: 18px;
+    }
+}
+.form-info__user {
+    flex-wrap: wrap;
 
-    div {
-        margin-bottom: 20px;
+    p {
+        margin-right: 6px;
+        font-size: 16px;
+        line-height: 24px;
     }
 }
