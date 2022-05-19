@@ -52,9 +52,9 @@ export default function Shipping() {
             <title>Addresa de livrare</title>
         </Helmet>
         <FinishSteps step1 step2 />
-        <h1>Addresa de livrare</h1>
+        <h1 className='mb-4'>Addresa de livrare</h1>
         <Form onSubmit={submitHandler}>
-            <Form.Group className="mb-3" controlId="fullname">
+            <Form.Group controlId="fullname" className="mb-3 mb-sm-4">
                 <Form.Label>Nume complet</Form.Label>
                 <Form.Control 
                     type="text" 
@@ -64,7 +64,7 @@ export default function Shipping() {
                     required
                 />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="address">
+            <Form.Group controlId="address" className="mb-3 mb-sm-4">
                 <Form.Label>Addresa</Form.Label>
                 <Form.Control 
                     type="text" 
@@ -74,7 +74,7 @@ export default function Shipping() {
                     required 
                 />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="phoneNumber">
+            <Form.Group controlId="phoneNumber" className="mb-3 mb-sm-4">
                 <Form.Label>Nr.telefon</Form.Label>
                 <Form.Control 
                     type="number" 
@@ -84,7 +84,7 @@ export default function Shipping() {
                     required
                 />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="city">
+            <Form.Group controlId="city" className="mb-3 mb-sm-4">
                 <Form.Label>Orasul</Form.Label>
                 <Form.Control 
                     type="text" 
@@ -94,7 +94,7 @@ export default function Shipping() {
                     required
                 />
             </Form.Group>
-            <Form.Group className="mb-4" controlId='country'>
+            <Form.Group controlId='country' className="mb-3 mb-sm-4">
                 <Form.Label>Tara</Form.Label>
                 <Form.Control 
                     type="text" 
@@ -104,7 +104,7 @@ export default function Shipping() {
                     required
                 />
             </Form.Group>
-            <Button variant="success" type="submit">
+            <Button variant="primary" type="submit">
                 Confirma
             </Button>
         </Form>

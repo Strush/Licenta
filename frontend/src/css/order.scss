@@ -3,6 +3,8 @@
     color: #a0a0a0;
     font-size: 14px;
     padding: 10px 5px;
+    display: flex;
+    align-items: center;
   }
   .finish-steps > div.active {
     border-bottom: 0.2rem solid $teal;
