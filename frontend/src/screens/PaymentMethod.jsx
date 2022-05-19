@@ -33,12 +33,12 @@ export default function PaymentMethod() {
     return (
         <div className='payment small-container'>
             <Helmet>
-                <title>Platește</title>
+                <title>Selectează metoda de plată</title>
             </Helmet>
             <FinishSteps step1 step2 step3 />
-            <h1>Platește</h1>
+            <h1 className='mb-3'>Selectează metoda de plată</h1>
             <Form onSubmit={submitHandler} className="form">
-                <div>
+                <Form.Group className='mb-3'>
                     <Form.Check 
                         type="radio"
                         id="PayPal"
@@ -47,8 +47,8 @@ export default function PaymentMethod() {
                         checked={paymentMethodName === 'PayPal'}
                         onChange={(e) => setPaymentMethod(e.target.value)}
                     />
-                </div>
-                <div>
+                </Form.Group>
+                <Form.Group className='mb-3'>
                     <Form.Check 
                         type="radio"
                         id="Cash"
@@ -57,8 +57,8 @@ export default function PaymentMethod() {
                         checked={paymentMethodName === 'Cash'}
                         onChange={(e) => setPaymentMethod(e.target.value)}
                     />
-                </div>
-                <Button type="submit">Continua</Button>
+                </Form.Group>
+                <Button type="submit" variant='primary' size='md'>Continuă</Button>
             </Form>
         </div>
     )
