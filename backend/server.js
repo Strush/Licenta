@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from 'dotenv';
 import mongoose from "mongoose";
+import path from "path";
 import seedRouter from "./routes/seedRoutes.js";
 import productRouter from "./routes/productRouter.js";
 import userRouter from "./routes/userRouter.js";
@@ -35,6 +36,13 @@ app.use('/api/orders',orderRouter);
 // Se transmite PAYPAL_CLIENT_IT in frontent
 app.use('/api/keys/paypal',(req,res) => {
     res.send(process.env.PAYPAL_CLINT_ID || 'sb'); // sb => standart sandbox
+});
+
+/* */
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, '/frontend/build')));
+app.get('*', (req,res) => {
+    res.sendFile(path.join(__dirname, '/frontend/build/index.html'));
 });
 
 // ExpressAsyncHandler afisarea erorilor 

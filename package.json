@@ -1,0 +1,14 @@
+{
+  "name": "licenta",
+  "version": "1.0.0",
+  "description": "1. Am creat o aplicatie in React\r 2. Creat un repository in Github\r 3. Am creat un obiect de produse\r 5. Am afisat produsele exemple\r 6. Am instalat BrowserRouter",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd backend && npm install && cd ../frontend && npm install && npm run build",
+    "start": "node backend/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
