@@ -64,7 +64,7 @@ export default function UserProfile() {
 			<Helmet>
 				<title>Profilul meu</title>
 			</Helmet>
-			<h1>Profilul meu</h1>
+			<h1 className='mb-3'>Profilul meu</h1>
 			{loading && <LoadingBox />}
 			<Form className='form' onSubmit={submitHadler}>
 				<Form.Group className='mb-3'>
@@ -101,8 +101,8 @@ export default function UserProfile() {
 						onChange={(e) => setConfirmPassword(e.target.value)}
 					/>
 				</Form.Group>
-				<Button type='sumbit' variant='success'>
-					Modifica
+				<Button type='sumbit' variant='primary'>
+					Modifică
 				</Button>
 			</Form>
 		</div>

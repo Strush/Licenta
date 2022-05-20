@@ -7,6 +7,7 @@ import { Store } from '../Store';
 import getError from '../utils';
 import LoadingBox from '../components/LoadingBox';
 import Messagebox from '../components/MessageBox';
+import TooltipInfo from '../components/TooltipInfo';
 
 const reducer = (state, action) => {
 	switch(action.type) {
@@ -52,35 +53,35 @@ export default function OrderHistory() {
 			<Helmet>
 				<title>Istoric comenzi</title>
 			</Helmet>
-      <h1>Istoric comenzi</h1>
-			{loading ? (<LoadingBox />) : error ? (<Messagebox />) : (
-				<Table bordered hover>
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>ID</th>
-							<th>Data Comenzi</th>
-							<th>Pretul total</th>
-							<th>Achitat</th>
-							<th>Livrat</th>
-							<th>Detalii</th>
-						</tr>
-					</thead>
-					<tbody>
-							{orders.map((item,index) => (
-								<tr key={item._id}>
-									<td>{index}</td>
-									<td>{item._id}</td>
-									<td>{item.createdAt.substring(0, 10)}</td>
-									<td>{item.totalPrice.toFixed(2)}Lei</td>
-									<td>{item.isPaid ? item.createdAt.substring(0, 10) : 'NU'}</td>
-									<td>{item.isDelivered ? 'DA' : 'NU'}</td>
-									<td><Button variant='secondary' onClick={() => navigate(`/order/${item._id}`)}>Detalii</Button></td>
-								</tr>
-							))}
-					</tbody>
-				</Table>
-			)}
+      	<h1 className='mb-4'>Istoric comenzi</h1>
+		{loading ? (<LoadingBox />) : error ? (<Messagebox />) : (
+			<Table bordered hover>
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>ID</th>
+						<th>Data</th>
+						<th>Prețul</th>
+						<th>Achitat</th>
+						<th>Livrat</th>
+						<th>Detalii</th>
+					</tr>
+				</thead>
+				<tbody>
+						{orders.map((item,index) => (
+							<tr key={item._id}>
+								<td>{index}</td>
+								<td>{item._id}</td>
+								<td>{item.createdAt.substring(0, 10)}</td>
+								<td>{item.totalPrice.toFixed(2)}Lei</td>
+								<td>{item.isPaid ? item.createdAt.substring(0, 10) : 'NU'}</td>
+								<td>{item.isDelivered ? 'DA' : 'NU'}</td>
+								<td><Button variant='secondary' className='w-100' onClick={() => navigate(`/order/${item._id}`)}>Detalii</Button></td>
+							</tr>
+						))}
+				</tbody>
+			</Table>
+		)}
     </div>
   )
 }
