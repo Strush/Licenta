@@ -83,67 +83,67 @@ const Orderscreen = () => {
 
     return (
         loading ? (<LoadingBox />) : 
-        error ? (<Messagebox>{error}</Messagebox>) :
-        (
-<div className='order'>
+        error ? (<Messagebox>{error}</Messagebox>) 
+        : (
+        <div className='order'>
             <FinishSteps step1 step2 step3 step4 />
             <Helmet>
-                <title>Finalizare Comanda</title>
+                <title>Plasează Comanda</title>
             </Helmet>
-            <h1>Finalizare Comanda</h1>
+            <h1 className='mb-3'>Plasează Comanda</h1>
             <Row>
-                <Col md={8}>
-                    <Card className='mb-4'>
+                <Col lg={8} className="mb-4 mb-lg-0">
+                    <Card className='mb-3 mb-sm-4'>
                         <Card.Body>
-                            <Card.Title>Date despre livrare</Card.Title>
                             <Card.Text>
-                                <strong>Nume: </strong> {cart.shippingAddress.fullname} <br />
-                                <strong>Nr telefon: </strong> {cart.shippingAddress.phoneNumber} <br />
-                                <strong>Adresa: </strong> 
-                                {cart.shippingAddress.address},{cart.shippingAddress.city},{cart.shippingAddress.country}
+                                <span className='mb-2 d-block'>
+                                    <strong>Nume: </strong> {cart.shippingAddress.fullname}
+                                </span>
+                                <span className='mb-2 d-block'>
+                                    <strong>Nr telefon: </strong> {cart.shippingAddress.phoneNumber}
+                                </span>
+                                <span className='mb-2 d-block'>
+                                    <strong>Adresa:</strong>{cart.shippingAddress.address},{cart.shippingAddress.city},{cart.shippingAddress.country}
+                                </span>
                             </Card.Text>
                             <Link to="/shipping">Edit</Link>
                         </Card.Body>
                     </Card>
-                    <Card className='mb-4'>
+                    <Card className='mb-3 mb-sm-4'>
                         <Card.Body>
-                            <Card.Title>Metoda de plata</Card.Title>
-                            <Card.Text><strong>Metoda de plata: </strong>{cart.paymentMethod}</Card.Text>
+                            <Card.Text className='mb-2'><strong>Metoda de plata: </strong>{cart.paymentMethod}</Card.Text>
                             <Link to='/payment'>Edit</Link>
                         </Card.Body>
                     </Card>
                     <Card>
                         <Card.Body>
-                            <Card.Title>Produsele</Card.Title>
-                                {cart.cartItems.map((item) => (
-                                    <div className='cart__item' key={item._id}>
-                                        <div className='thumbnail'>
-                                            <img src={item.image} alt={item.name} />
-                                        </div>
-                                        <div className='name'>
-                                            <Link to={`/product/${item.slug}`} className='title'>{item.name}</Link>
-                                        </div>
-                                        <div className='quantity'>{item.quantity}</div>
-                                        <div className='price'>
-                                            <p>{item.price} lei</p>
-                                        </div>
+                            {cart.cartItems.map((item) => (
+                                <div className='cart__item' key={item._id}>
+                                    <div className='thumbnail'>
+                                        <img src={item.image} alt={item.name} />
                                     </div>
-                                ))}
-                                <Link to="/cart">Edit</Link>
+                                    <div className='name'>
+                                        <Link to={`/product/${item.slug}`} className='title'>{item.name}</Link>
+                                    </div>
+                                    <div className='quantity'>{item.quantity}</div>
+                                    <div className='price'>{item.price} lei</div>
+                                </div>
+                            ))}
+                            <Link to="/cart">Edit</Link>
                         </Card.Body>
                     </Card>
                 </Col>
-                <Col md={4}>
+                <Col lg={4}>
                     <Card className='order__sidebar'>
                         <Card.Body>
-                            <Card.Title><strong>Comanda acum</strong></Card.Title>
-                            <ul className='order__sidebar_nav'>
-                                <li>
+                            <Card.Title className='mb-3'><strong>Comandă acum</strong></Card.Title>
+                            <ul className='order__sidebar_nav mb-3'>
+                                <li className='mb-2'>
                                     Cantitatea: <strong>{cart.cartItems.reduce((a,c) => a + c.quantity,0)}</strong>
                                 </li>
-                                <li>
+                                <li className='mb-2'>
                                     <p className='tooltip__message'>Livrare:
-                                        <TooltipInfo message="Livare gratuita la comenzile mai mari de 200 lei."/> 
+                                        <TooltipInfo message="Livare gratuită la comenzile mai mari de 200 lei."/> 
                                     </p>
                                     <strong>{(cart.itemsPrice > 200) ? 0 : 20} lei</strong>
                                 </li>
@@ -151,7 +151,7 @@ const Orderscreen = () => {
                                     Total: <strong>{total.toFixed(2)} lei</strong>
                                 </li>
                             </ul>
-                            <Button variant="success" onClick={orderHandler} disabled={cart.cartItems.length === 0}>Plaseaza Comanda</Button>
+                            <Button variant="primary w-100" size='md' onClick={orderHandler} disabled={cart.cartItems.length === 0}>Plasează Comanda</Button>
                         </Card.Body>
                     </Card>
                 </Col>

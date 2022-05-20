@@ -240,6 +240,30 @@
 		padding: 10px;
 		font-size: 12px;
 	}
+
+	/* Order */
+	.order {
+		.cart__item {
+			padding: 0 10px 0 0;
+			margin-bottom: 15px;
+			column-gap: 12px;
+		}
+		.title,
+		.quantity, 
+		.price {
+			font-size: 14px;
+		}
+		.thumbnail {
+			width: 70px;
+			height: 70px;
+		}
+		.card-body {
+			padding: 12px;
+		}
+		.card-text {
+			font-size: 16px;
+		}
+	}
 }
 
 @media only screen and (max-width: 400px) {

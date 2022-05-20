@@ -17,6 +17,8 @@
     @include product-list;
 
     .cart__item {
+      margin-bottom: 20px;
+      padding: 15px;
 
       .quantity {
         margin-left: auto;
@@ -28,6 +30,5 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
     }
   }

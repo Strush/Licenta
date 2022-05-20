@@ -36,6 +36,14 @@ h1, h2, h3,h4,h5 {
   margin: 0;
 }
 
+/* Margin */
+.mr-8 {
+  margin-right: 8px;
+}
+.ml-8 {
+  margin-left: 8px;
+}
+
 /* Spinner */
 .loading-box {
   width: 65px;
@@ -61,10 +69,9 @@ h1, h2, h3,h4,h5 {
   align-items: center;
 }
 
-/* Margin */
-.mr-8 {
-  margin-right: 8px;
-}
-.ml-8 {
-  margin-left: 8px;
+/* Tooltip */
+.tooltip__message img {
+  width: 20px;
+  height: 20px;
+  margin-left: 3px;
 }
