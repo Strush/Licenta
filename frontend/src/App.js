@@ -38,9 +38,9 @@ function App() {
               <Route path='/shipping' element={<Shipping />} />
               <Route path='/payment' element={<PaymentMethod />} />
               <Route path='/placeholder' element={<Orderscreen />} />
-              {/*<Route path='/orderhistory' element={<OrderHistory />} />
+              <Route path='/orderhistory' element={<OrderHistory />} />
               <Route path='/users/profile' element={<UserProfile />} />
-              <Route path='/order/:id' element={<OrderDetails />} /> */}
+              <Route path='/order/:id' element={<OrderDetails />} />
             </Routes>
           </div>
         </main>

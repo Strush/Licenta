@@ -3,7 +3,7 @@ import { Alert } from 'react-bootstrap';
 
 const Messagebox = (props) => {
     return (
-        <Alert variant={props.variant} className="alert__box py-1 m-0">
+        <Alert variant={props.variant} className="alert__box py-2 m-0">
             {props.children}
         </Alert>
     );

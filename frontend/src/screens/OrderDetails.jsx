@@ -145,86 +145,83 @@ function OrderDetails() {
     return loading ? (<LoadingBox />) : 
         error ? (<Messagebox variant="danger">{error}</Messagebox>) : 
         (
-            <div className='order'>
+            <div className='order order--details'>
                 <Helmet>
                     <title>Comanda:{orderId}</title>
                 </Helmet>
-                <h1>Comanda:{orderId}</h1>
+                <h1 className='mb-3'>Comanda:{orderId}</h1>
                 <Row>
-                    <Col md={8}>
-                        <Card className='mb-4'>
+                    <Col lg={8} className="mb-4 mb-lg-0">
+                        <Card className='mb-3 mb-sm-4'>
                             <Card.Body>
-                                <Card.Title><strong>Date despre livrare</strong></Card.Title>
                                 <Card.Text>
-                                    <strong>Nume: </strong> {order.shippingAddress.fullname} <br />
-                                    <strong>Nr telefon: </strong> {order.shippingAddress.phoneNumber} <br />
-                                    <strong>Adresa: </strong> 
-                                    {order.shippingAddress.address},{order.shippingAddress.city},{order.shippingAddress.country}
+                                <span className='mb-2 d-block'>
+                                    <strong>Nume: </strong> {order.shippingAddress.fullname}
+                                </span>
+                                <span className='mb-2 d-block'>
+                                    <strong>Nr telefon: </strong> {order.shippingAddress.phoneNumber}
+                                </span>
+                                <span className='mb-2 d-block'>
+                                    <strong>Adresa:</strong>{order.shippingAddress.address},{order.shippingAddress.city},{order.shippingAddress.country}
+                                </span>
                                 </Card.Text>
-                                <div>
-                                    <strong>Status livrare: </strong>
-                                    {order.isDelivered 
-                                        ? 
-                                        (<Messagebox variant="success">A fost livrat {order.deliveredAt}</Messagebox>) 
-                                        : 
-                                        (<Messagebox variant="danger">Nu a fost livrat</Messagebox>)
-                                    }
-                                </div>
+                                {order.isDelivered 
+                                    ? 
+                                    (<Messagebox variant="success">A fost livrat {order.deliveredAt}</Messagebox>) 
+                                    : 
+                                    (<Messagebox variant="danger">Nu a fost livrat</Messagebox>)
+                                }
                             </Card.Body>
                         </Card>
-                        <Card className='mb-4'>
+                        <Card className='mb-3 mb-sm-4'>
                             <Card.Body>
-                                <Card.Title><strong>Date despre metoda de plata</strong></Card.Title>
                                 <Card.Text className='mb-2'><strong>Metoda de plata: </strong>{order.paymentMethod}</Card.Text>
-                                <div>
-                                    <strong>Status achitare: </strong>
                                     {order.isPaid 
                                     ? (<Messagebox variant="success">Achitat: {order.paidAt}</Messagebox>) 
-                                    : (<Messagebox variant="danger">Neachitat</Messagebox>)}
-                                </div>
+                                    : (<Messagebox variant="danger">Neachitat</Messagebox>)
+                                    }
                             </Card.Body>
-        
                         </Card>
                         <Card>
                             <Card.Body>
-                                <Card.Title>Produsele</Card.Title>
-                                    {order.orderItems.map((item) => (
-                                        <div className='cart__item' key={item._id}>
-                                            <div className='thumbnail'>
-                                                <img src={item.image} alt={item.name} />
-                                            </div>
-                                            <div className='name'>
-                                                <Link to={`/product/${item.slug}`} className='title'>{item.name}</Link>
-                                            </div>
-                                            <div className='quantity'>{item.quantity}</div>
-                                            <div className='price'>
-                                                <p>{item.price}$</p>
-                                            </div>
+                                {order.orderItems.map((item) => (
+                                    <div className='cart__item' key={item._id}>
+                                        <div className='thumbnail'>
+                                            <img src={item.image} alt={item.name} />
                                         </div>
-                                    ))}
+                                        <div className='name'>
+                                            <Link to={`/product/${item.slug}`} className='title'>{item.name}</Link>
+                                        </div>
+                                        <div className='quantity'>{item.quantity}</div>
+                                        <div className='price'>
+                                            <p>{item.price}$</p>
+                                        </div>
+                                    </div>
+                                ))}
                             </Card.Body>
                         </Card>
                     </Col>
-                    <Col md={4}>
+                    <Col lg={4}>
                         <Card className='order__sidebar'>
                         <Card.Body>
-                            <Card.Title><strong>Comanda acum</strong></Card.Title>
+                            <Card.Title className='mb-2'><strong>Comandă acum</strong></Card.Title>
                             <ul className='order__sidebar_nav'>
-                                <li>
-                                    Cantitatea: <strong>{order.orderItems.reduce((a,c) => a + c.quantity,0)}</strong>
+                                <li className='mb-2'>
+                                    <p className='d-flex justify-content-between w-100'>Cantitatea: <strong>{order.orderItems.reduce((a,c) => a + c.quantity,0)}</strong></p>
                                 </li>
-                                <li>
+                                <li className='mb-2'>
                                     <p className='tooltip__message'>Livrare:
                                         <TooltipInfo message="Livare gratuita la comenzile mai mari de 200 lei."/> 
                                     </p>
                                     <strong>{(order !== 0) ? 0 : 20} lei</strong>
                                 </li>
-                                <li>
-                                    Total: <strong>{order.totalPrice}$</strong>
+                                <li className='mb-3'>
+                                    <p className='d-flex justify-content-between w-100'>Total: <strong>{order.totalPrice}$</strong></p>
                                 </li>
                             </ul>
                             {!order.isPaid && (
-                                <div>
+                                <div className='position-relative'>
+   
                                     {isPending ? (<LoadingBox/>) : (
                                     <div>
                                         <PayPalButtons 
