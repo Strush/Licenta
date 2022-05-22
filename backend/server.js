@@ -18,7 +18,7 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
     console.log('Conectat cu success la DB');
 }).catch((err) => {
     console.log(err.message)
-})
+});
 
 // Seed API (Mongodb)
 app.use('/api/seed', seedRouter);
@@ -39,11 +39,11 @@ app.use('/api/keys/paypal',(req,res) => {
 });
 
 /* */
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, '/frontend/build')));
-app.get('*', (req,res) => {
-    res.sendFile(path.join(__dirname, '/frontend/build/index.html'));
-});
+// const __dirname = path.resolve();
+// app.use(express.static(path.join(__dirname, '/frontend/build')));
+// app.get('*', (req,res) => {
+//     res.sendFile(path.join(__dirname, '/frontend/build/index.html'));
+// });
 
 // ExpressAsyncHandler afisarea erorilor 
 app.use((err,req,res,next) => {

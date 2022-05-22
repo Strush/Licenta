@@ -35,21 +35,8 @@
 
 @media only screen and (max-width: 767.99px) {
 
-	/* Global */
-	.bage--box {
-		position: absolute;
-		right: 0;
-		top: 50%;
-		transform: translateY(-50%);
-	}
-
 	/* Header */
 	.header {
-		.cart {
-			margin-right: 0;
-			margin-bottom: 15px;
-			position: relative;
-		}
 
 		.navbar {
 			position: static;
@@ -61,6 +48,7 @@
 				background-color: #fff;
 				z-index: 9999;
 				left: 0;
+				height: 100vh;
 				box-shadow: $shadow-bottom;
 				padding-bottom: 20px;
 			} 

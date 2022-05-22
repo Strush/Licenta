@@ -18,3 +18,10 @@
 1. Credit Card Number: 4032031905597919
 2. Credit Card Type: VISA
 3. Expiration Date: 03/2026
+
+# Mongodb
+1. Database Name: eoomi
+2. Collection name: eoomi
+3. User Database
+4. Username: eoomi
+5. Parola: sT9jif1HOL0mQBHM
