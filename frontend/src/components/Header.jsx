@@ -53,6 +53,18 @@ return (
 							}
 						</Nav>
 					</Navbar.Collapse>
+					{userInfo && userInfo.isAdmin ? (
+						<div className='admin__menu'>
+							<NavDropdown className='text-white' title="Admin">
+								<LinkContainer to="/admin/dashboard">
+									<NavDropdown.Item>Dashboard</NavDropdown.Item>
+								</LinkContainer>
+								<LinkContainer to="/admin/products">
+									<NavDropdown.Item>Produse</NavDropdown.Item>
+								</LinkContainer>
+							</NavDropdown>
+						</div>
+					) : ''}
 				</div>
 			</Navbar>
 		</Container>

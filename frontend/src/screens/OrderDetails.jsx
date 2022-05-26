@@ -194,7 +194,7 @@ function OrderDetails() {
                                         </div>
                                         <div className='quantity'>{item.quantity}</div>
                                         <div className='price'>
-                                            <p>{item.price}$</p>
+                                            <p>{item.price} lei</p>
                                         </div>
                                     </div>
                                 ))}
@@ -216,7 +216,7 @@ function OrderDetails() {
                                     <strong>{(order !== 0) ? 0 : 20} lei</strong>
                                 </li>
                                 <li className='mb-3'>
-                                    <p className='d-flex justify-content-between w-100'>Total: <strong>{order.totalPrice}$</strong></p>
+                                    <p className='d-flex justify-content-between w-100'>Total: <strong>{order.totalPrice} lei </strong></p>
                                 </li>
                             </ul>
                             {!order.isPaid && (

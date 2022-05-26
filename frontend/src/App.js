@@ -14,8 +14,10 @@ import OrderDetails from './screens/OrderDetails';
 import OrderHistory from './screens/OrderHistory';
 import Header from './components/Header';
 import UserProfile from './screens/UserProfile';
-import { Container } from 'react-bootstrap';
 import Footer from './components/Footer';
+import ProtectedRoute from './admin/ProtectedRoute';
+import AdminRoute from './admin/AdminRoute';
+import Dashboard from './screens/Admin/Dashboard';
 
 function App() {
   
@@ -30,17 +32,21 @@ function App() {
         <main>
           <div className="container">
             <Routes>
-              <Route path='/' element={<FrontPage />} />
               <Route path='/product/:slug' element={<SingleProduct/>} />
               <Route path='/cart' element={<Cart/>} />
               <Route path='/signin' element={<SingIn/>} />
               <Route path='/signup' element={<SignUp/>} />
-              <Route path='/shipping' element={<Shipping />} />
-              <Route path='/payment' element={<PaymentMethod />} />
+              <Route path='/shipping' element={<ProtectedRoute> <Shipping /></ProtectedRoute>} />
+              <Route path='/payment' element={<ProtectedRoute><PaymentMethod /></ProtectedRoute> } />
               <Route path='/placeholder' element={<Orderscreen />} />
-              <Route path='/orderhistory' element={<OrderHistory />} />
-              <Route path='/users/profile' element={<UserProfile />} />
-              <Route path='/order/:id' element={<OrderDetails />} />
+              <Route path='/orderhistory' element={<ProtectedRoute><OrderHistory /></ProtectedRoute>} />
+              <Route path='/users/profile' element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
+              <Route path='/order/:id' element={<ProtectedRoute><OrderDetails /></ProtectedRoute> } />
+
+              {/* Admin Routes */}
+              <Route path='/admin/dashboard' element={<AdminRoute><Dashboard /></AdminRoute>} />
+
+              <Route path='/' element={<FrontPage />} />
             </Routes>
           </div>
         </main>
