@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useContext } from 'react';
 import { Store } from '../Store';
-import {Container, Navbar, NavDropdown, Dropdown, Nav} from 'react-bootstrap';
+import {Container, Navbar, NavDropdown, Dropdown, Nav, Button} from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faBars} from '@fortawesome/free-solid-svg-icons';
 import {LinkContainer} from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
+import FilterMenu from './FilterMenu';
 
 export default function Header() {
 
 	const {state, dispatch: ctxDispatch} = useContext(Store);
 	const { cart, userInfo } = state;
+
+	const [openFilter, setOpenFilter] = useState(false);
+	console.log(openFilter);
 
 	const signOutHandler = () => {
 		ctxDispatch({type:'USER_SIGN_OUT'});
@@ -17,12 +23,21 @@ export default function Header() {
 		localStorage.removeItem('paymentMethod');
 	}
 
+	const closeFilterHandler = (e) => {
+		if(e.target.className !== 'filter__menu'){
+			setOpenFilter(!openFilter);
+		}
+	}
+
 return (
 	<header className="header">
 		<Container>
 			<Navbar expand="md" className='justify-content-between'>
-				<div className='logo'>
-					<Link to='/'>Eoomi</Link>
+				<div className='d-flex align-items-center'>
+					<FontAwesomeIcon icon={faBars} size="lg" className='me-3 mt-1' onClick={() => setOpenFilter(!openFilter)} />
+					<div className='logo'>
+						<Link to='/'>Eoomi</Link>	
+					</div>
 				</div>
 				<div className='d-flex'>
 					<Link className='cart' to={'/cart'}>Coș
@@ -67,6 +82,9 @@ return (
 					) : ''}
 				</div>
 			</Navbar>
+			<div className={openFilter ? 'filter filter--active' : 'filter'} onClick={closeFilterHandler}>
+				<FilterMenu value={openFilter} valueChanged={setOpenFilter} />
+			</div>
 		</Container>
 	</header>
 	)

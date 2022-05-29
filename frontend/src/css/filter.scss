@@ -1,0 +1,41 @@
+.filter {
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    z-index: -1;
+    width: 100%;
+    height: 100vh;
+    transition: 0.5s ease;
+
+    .filter__menu {
+        box-shadow: $shadow-light;
+        z-index: 999;
+        width: 300px;
+        height: 100%;
+        margin-left: -150%;
+        transition: 0.5s ease;
+        background-color: $gray-100;
+        padding: 20px;
+    }
+}
+
+.filter--active {
+    background-color: rgba(0,0,0,0.5);
+    z-index: 999;
+    transition: 0.5s ease;
+
+    .filter__menu {
+        margin-left: 0;
+        transition: 0.5s ease;
+    }
+}
+
+.filter__icon {
+    cursor: pointer;
+    padding: 20px 10px;
+
+    svg {
+        color: #fff;
+    }
+}

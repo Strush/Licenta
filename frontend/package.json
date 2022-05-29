@@ -4,6 +4,8 @@
   "proxy": "http://localhost:5000",
   "private": true,
   "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.1.18",
     "@paypal/react-paypal-js": "^7.7.0",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.3",
