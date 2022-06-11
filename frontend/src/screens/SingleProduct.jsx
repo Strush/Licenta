@@ -67,14 +67,14 @@ function SingleProduct() {
 
   return (
     <>
+      <Helmet>
+        <title>{product.name}</title>
+      </Helmet> 
       { loading ? (<LoadingBox />) : error ? (<Messagebox variant="danger">{error}</Messagebox>) : (
         <div className="single__product">
           <div className='product__thumbnail'>
               <img className='product__img' src={product.image} alt="No Image"></img>
-          </div>
-          <Helmet>
-            <title>{product.name}</title>
-          </Helmet>    
+          </div>   
           <div className='px-3 px-lg-0'>
             <div className='product__content'>
               <div>          

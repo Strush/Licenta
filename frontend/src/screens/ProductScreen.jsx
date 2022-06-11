@@ -20,7 +20,7 @@ const reducer = (state,action) => {
     }
 } 
 
-function ProductScreen(props){
+function ProductScreen(){
 
     const [{loading,products,error},dispatch] = useReducer(reducer,{
         loading: true,
@@ -76,7 +76,9 @@ function ProductScreen(props){
                                     <p>{product.name}</p>
                                  </Link>
                                 <p className="price"><strong>{product.price} lei</strong></p>
-                                {(product.countInStock > 0) ? (<Button variant="primary" className="w-100" onClick={() => addToCart(product)}>Adaugă în Coș</Button>) : (
+                                {(product.countInStock > 0) ? (<Button variant="primary" className="w-100" onClick={() => addToCart(product)}>           
+                                    Adaugă în Coș</Button>
+                                ) : (
                                     <Button variant="danger" className="w-100" >Stock Epuizat</Button>
                                 ) }
                             </div>

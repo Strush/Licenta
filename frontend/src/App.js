@@ -18,6 +18,7 @@ import Footer from './components/Footer';
 import ProtectedRoute from './admin/ProtectedRoute';
 import AdminRoute from './admin/AdminRoute';
 import Dashboard from './screens/Admin/Dashboard';
+import ResultsFilter from './components/ResultsFilter';
 
 function App() {
   
@@ -38,6 +39,7 @@ function App() {
               <Route path='/signup' element={<SignUp/>} />
               <Route path='/shipping' element={<ProtectedRoute> <Shipping /></ProtectedRoute>} />
               <Route path='/payment' element={<ProtectedRoute><PaymentMethod /></ProtectedRoute> } />
+              <Route path='/search' element={<ResultsFilter />} />
               <Route path='/placeholder' element={<Orderscreen />} />
               <Route path='/orderhistory' element={<ProtectedRoute><OrderHistory /></ProtectedRoute>} />
               <Route path='/users/profile' element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />

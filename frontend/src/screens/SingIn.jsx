@@ -66,7 +66,7 @@ export default function SingIn() {
               required 
           />
         </Form.Group>
-        <Button variant="primary w-100 mb-2" type="submit">Autentificare</Button>
+        <Button variant="primary w-100 mb-2" type="submit">Autentificare </Button>
       </Form>
       <div className='form-info__user'>
           <p>Sunteți utilizator nou,</p>
