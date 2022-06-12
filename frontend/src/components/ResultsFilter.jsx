@@ -133,7 +133,7 @@ export default function ResultsFilter() {
             <Col md={2}>
                 {categories.length !==0 
                 ? (
-                    <div className='mb-3'>
+                    <div className='mb-3 filter-item'>
                         <h4 className='text-bold'>Brand</h4>
                         <ul>
                             <li>
@@ -156,7 +156,7 @@ export default function ResultsFilter() {
                     </div>
                 ) : 'No brand found!'
                 }
-                <div className='mb-3'>
+                <div className='mb-3 filter-item'>
                     <h4 className='text-bold'>Pret</h4>
                     <ul>
                         <li>
@@ -179,7 +179,7 @@ export default function ResultsFilter() {
                 </div>
 
             {/* // Ratings */}
-            <div className='mb-3'>
+            <div className='mb-3 filter-item'>
                 <h4 className='text-bold'>Rating</h4>
                 <ul>
                     <li>
@@ -209,7 +209,8 @@ export default function ResultsFilter() {
                 error ? (<MessageBox variant="danger">{error}</ MessageBox>) 
                 : (
                     <>
-                        <Col md={6}>
+                    <div className='filter--box'>
+                        <div className="filter-item">
                             <div>
                                 {countProducts === 0 ? 'No' : countProducts} Rezultate
                                 {query !== 'all' && ' : ' + query}
@@ -217,15 +218,16 @@ export default function ResultsFilter() {
                                 {price !== 'all' && ' : ' + price}
                                 {rating !== 'all' && ' : Rating ' + rating}
                                 {query !== 'all' || category !== 'all' || price !== 'all' || rating !== 'all' ? (
-                                    <Button variant='light' onClick={() => navigate('/search')}>
-                                        <FontAwesomeIcon  icon={faTimes} />
+                                    <Button variant='light' className='ms-2 px-2' size="sm" onClick={() => navigate('/search')}>
+                                        <FontAwesomeIcon icon={faTimes} />
                                     </Button> 
                                 ) : null}  
                             </div>
-                        </Col>
-                        <Col className='text-end'>
+                        </div>
+                        <div className='filter-item'>
                             Sorteaza dupa{' '}
                             <select 
+                                className='p-1'
                                 value={order}
                                 onChange={(e) => {
                                     navigate(getUrlFilter({order: e.target.value}));
@@ -236,8 +238,8 @@ export default function ResultsFilter() {
                                 <option value="highest">Price: High to Low</option>
                                 <option value="toprated">Rating</option>
                             </select>
-                        </Col>
-
+                        </div>
+                    </div>
                         <Row>
                             {products.length === 0 ? (
                                 <MessageBox variant="danger">Nu sa gasit nici un produs!</MessageBox>

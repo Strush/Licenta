@@ -16,6 +16,7 @@
     "react": "^17.0.2",
     "react-bootstrap": "^2.3.0",
     "react-dom": "^17.0.2",
+    "react-google-charts": "^4.0.0",
     "react-helmet": "^6.1.0",
     "react-helmet-async": "^1.2.3",
     "react-paypal-js": "^0.0.1-security",
