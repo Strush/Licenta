@@ -19,6 +19,7 @@ import ProtectedRoute from './admin/ProtectedRoute';
 import AdminRoute from './admin/AdminRoute';
 import Dashboard from './screens/Admin/Dashboard';
 import ResultsFilter from './components/ResultsFilter';
+import Products from './screens/Admin/Products';
 
 function App() {
   
@@ -47,7 +48,7 @@ function App() {
 
               {/* Admin Routes */}
               <Route path='/admin/dashboard' element={<AdminRoute><Dashboard /></AdminRoute>} />
-
+              <Route path='/admin/products' element={<AdminRoute><Products /></AdminRoute>} />
               <Route path='/' element={<FrontPage />} />
             </Routes>
           </div>

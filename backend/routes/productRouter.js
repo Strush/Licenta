@@ -1,6 +1,7 @@
 import express, { query } from "express";
 import Product from "../models/productModel.js";
 import expressAsyncHandler from 'express-async-handler';
+import { isAdmin, isAuth } from "../utils.js";
 
 const productRouter = express.Router();
 
@@ -98,6 +99,28 @@ productRouter.get('/categories', expressAsyncHandler(async (req,res) => {
     const categories = await Product.find().distinct('category');
     res.send(categories);
 
+}));
+
+productRouter.get('/admin', 
+    isAuth, 
+    isAdmin, 
+    expressAsyncHandler(async (req,res) => {
+        const {query} = req;
+        const page = query.page || 1;
+        const pageSize = query.pageSize || 3;
+
+        const products = await 
+            Product.find()
+            .skip(pageSize * (page - 1))
+            .limit(pageSize);
+
+        const countProducts = await Product.countDocuments();
+        res.send({
+            products,
+            page,
+            countProducts,
+            pages: Math.ceil(countProducts / pageSize),
+        });
 }));
 
 // Cautam produsul in DB dupa slug
