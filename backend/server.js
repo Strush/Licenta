@@ -6,6 +6,7 @@ import seedRouter from "./routes/seedRoutes.js";
 import productRouter from "./routes/productRouter.js";
 import userRouter from "./routes/userRouter.js";
 import orderRouter from "./routes/orderRouter.js";
+import uploadRouter from "./routes/uploadsRouter.js";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -19,6 +20,8 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
 }).catch((err) => {
     console.log(err.message)
 });
+
+app.use('/api/upload', uploadRouter);
 
 // Seed API (Mongodb)
 app.use('/api/seed', seedRouter);

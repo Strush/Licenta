@@ -25,6 +25,13 @@ const reducer = (state, action) => {
         case "UPDATE_FAIL":
             return {...state, Updateloading: false}
 
+        case "UPLOAD_REQUEST":
+            return {...state, Uploadloading: true, uploadError: ''}
+        case "UPLOAD_SUCCESS":
+            return {...state, Uploadloading: false, uploadError: ''}
+        case "UPLOAD_FAIL":
+            return {...state, Uploadloading: false, uploadError: action.payload}
+
         default: {
             return state;
         }
@@ -37,7 +44,7 @@ export default function ProductDetails() {
     const {state} = useContext(Store);
     const {userInfo} = state;
 
-    const [{loading, error,Updateloading}, dispatch] = useReducer(reducer, {
+    const [{loading, error,Updateloading,Uploadloading}, dispatch] = useReducer(reducer, {
         loading: true,
         error: ''
     });
@@ -109,6 +116,27 @@ export default function ProductDetails() {
         }
     }
 
+    const uploadImageFile = async (e) => {
+        const file = e.target.files[0];
+        const bodyFormData = new FormData;
+        bodyFormData.append('file',file);
+        try {
+            dispatch({type: 'UPLOAD_REQUEST'});
+            const {data} = await axios.post('/api/upload',bodyFormData, {
+                headers :{
+                    'Content-Type': 'multipart/form-data',
+                    Authorization: `Bearer ${userInfo.token}`,
+                }
+            });
+            dispatch({type: 'UPLOAD_SUCCESS'});
+            toast.success('Imaginea a fost incarcata cu success');
+            setImage(data.secure_url);
+        } catch(err){
+            toast.error(err);
+            dispatch({type: 'UPLOAD_FAIL', payload: getError(err)});
+        }
+    }
+
     return (
     <div className='product-details small-container'>
         <Helmet>
@@ -147,6 +175,14 @@ export default function ProductDetails() {
                     onChange={((e) => setImage(e.target.value))}
                     required 
                 />
+            </Form.Group>
+            <Form.Group controlId="uploadImage" className='mb-3 mb-sm-4'>
+                <Form.Label>Incarca o Imagine</Form.Label>
+                <Form.Control 
+                    type="file"
+                    onChange={uploadImageFile}
+                />
+                {Uploadloading && <LoadingBox />}
             </Form.Group>
             <Form.Group controlId="brand" className='mb-3 mb-sm-4'>
                 <Form.Label>Brand</Form.Label>

@@ -48,7 +48,7 @@ function SingleProduct() {
 
   // Adaugam produsul in cos
   const {state, dispatch: ctxDispatch} = useContext(Store);
-  const {cart} = state;
+  const {cart,userInfo} = state;
 
   const addToCartHandler = async () => {
     const existProduct = cart.cartItems.find((x) => x._id === product._id);
