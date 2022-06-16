@@ -10,6 +10,49 @@ productRouter.get('/', async (req,res) => {
     res.send(products);
 });
 
+productRouter.post('/',
+    isAuth, 
+    isAdmin, expressAsyncHandler( async (req,res) => {
+    const newProduct = new Product({
+        name: 'demo' + Date.now(),
+        slug: 'demo-slug' + Date.now(),
+        image: 'no image',
+        brand: 'demo',
+        category: 'demo',
+        description: 'demo descriere',
+        price: 0,
+        countInStock: 0,
+        rating: 0,
+        numReviews: 0,
+    });
+    const product = await newProduct.save()
+    res.send({message: 'Produsul a fost creat cu succes', product});
+}));
+
+productRouter.put('/:id',
+    isAuth,
+    isAdmin,
+    expressAsyncHandler(async (req,res) => {
+        const productId = req.params.id;
+        const product = await Product.findById(productId);
+        if(product){
+            product.name = req.body.name;
+            product.slug = req.body.slug;
+            product.image = req.body.image;
+            product.brand = req.body.brand;
+            product.category = req.body.category;
+            product.description = req.body.description;
+            product.countInStock = req.body.countInStock;
+            product.rating = req.body.rating;
+            product.numReviews = req.body.numReviews;
+            await product.save();
+            res.send({message: 'Produsul a fsot modificat cu succes'})
+        } else {
+            res.status(404).send({message: 'Produsul nu exista!'})
+        }
+    })
+)
+
 // Search
 productRouter.get('/search', expressAsyncHandler(async (req,res) => {
     const {query} = req;

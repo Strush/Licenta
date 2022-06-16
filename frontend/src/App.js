@@ -20,6 +20,7 @@ import AdminRoute from './admin/AdminRoute';
 import Dashboard from './screens/Admin/Dashboard';
 import ResultsFilter from './components/ResultsFilter';
 import Products from './screens/Admin/Products';
+import ProductDetails from './screens/Admin/ProductDetails';
 
 function App() {
   
@@ -49,6 +50,8 @@ function App() {
               {/* Admin Routes */}
               <Route path='/admin/dashboard' element={<AdminRoute><Dashboard /></AdminRoute>} />
               <Route path='/admin/products' element={<AdminRoute><Products /></AdminRoute>} />
+              <Route path='/admin/product/:id' element={<AdminRoute><ProductDetails /></AdminRoute>} />
+
               <Route path='/' element={<FrontPage />} />
             </Routes>
           </div>

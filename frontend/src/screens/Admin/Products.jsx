@@ -1,14 +1,14 @@
 import axios from 'axios'
 import React, { useContext, useEffect, useReducer } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import LoadingBox from '../../components/LoadingBox';
 import Messagebox from '../../components/MessageBox';
 import { Store } from '../../Store'
 import getError from '../../utils'
 import { Helmet } from 'react-helmet-async'
-import { Col, Row, Table } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Button, Col, Row, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const reducer = (state, action) => {
     switch(action.type){
@@ -28,6 +28,14 @@ const reducer = (state, action) => {
                 error: action.payload,
                 loading: false,
             }
+
+        case 'CREATE_REQUEST': 
+            return {...state, loadingCreate: true}
+        case 'CREATE_SUCCES': 
+            return {...state, loadingCreate: false}
+        case 'CREATE_FAIL':
+            return {...state, loadingCreate: false}
+
         default: 
             return state;
     }
@@ -35,15 +43,18 @@ const reducer = (state, action) => {
 
 export default function Products() {
 
-    const [{loading, error, pages, products}, dispatch] = useReducer(reducer, {
+    const navigate = useNavigate();
+
+    const [{loading, error, pages, products,loadingCreate}, dispatch] = useReducer(reducer, {
         loading: true,
+        loadingCreate: false,
         error: ''
     });
 
     const { state } = useContext(Store);
     const { userInfo } = state;
 
-    const {search, pathname} = useLocation();
+    const {search} = useLocation();
     const sq = new URLSearchParams(search);
     const page  = sq.get('page') || 1;
 
@@ -63,19 +74,50 @@ export default function Products() {
         fecthData();
     },[page, userInfo]);
 
+    const createProductHandler = async () => {
+        try {
+            dispatch({type: 'CREATE_REQUEST'});
+            const {data} = await axios.post('/api/products', 
+            {},
+            {
+                headers: {
+                    Authorization: `Bearer ${userInfo.token}`
+                }
+            });
+            dispatch({type: 'CREATE_SUCCES'});
+            navigate(`/admin/product/${data.product._id}`);
+            
+        } catch (err) {
+            dispatch({type: 'CREATE_FAIL'});
+            toast.error(err);
+        }
+    }
+
     return (
     <div>
         <Helmet>
             <title>Produse</title>
         </Helmet>
-        <h1 className='mb-3'>Toate Produsele</h1>
+        <Row>
+            <Col md={6}>
+                <h1 className='mb-3'>Toate Produsele</h1>
+            </Col>
+            <Col md={6} className="text-r">
+                <Button variant='primary'
+                    onClick={createProductHandler}
+                >
+                    Adauga produs
+                </Button>
+            </Col>
+        </Row>
+  
         { loading 
             ? (<LoadingBox />) 
             : error ? <Messagebox variant="danger">{error}</Messagebox> 
             : 
             products.lenght !== 0 ? (
                 <>
-                    <Table striped bordered hover>
+                    <Table>
                     <thead>
                         <tr>
                             <th>#</th>
@@ -85,6 +127,7 @@ export default function Products() {
                             <th>In stok</th>
                             <th>Category</th>
                             <th>Brand</th>
+                            <th>Actiuni</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -98,6 +141,13 @@ export default function Products() {
                                     <td>{item.countInStock} produse</td>
                                     <td>{item.category}</td>
                                     <td>{item.brand}</td>
+                                    <td>
+                                        <Button variant='primary'>
+                                            <Link className='text-white' to={`/admin/product/${item._id}`}>
+                                                Edit
+                                            </Link>
+                                        </Button>
+                                    </td>
                                 </tr>
                             ))
                         }
