@@ -242,7 +242,7 @@ export default function ProductDetails() {
                 <Form.Control
                     type="number"
                     value={numReviews}
-                    onChange={((e) => setRating(e.target.value))}
+                    onChange={((e) => SetNumReviews(e.target.value))}
                     required 
                 />
             </Form.Group>

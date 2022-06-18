@@ -185,7 +185,7 @@ export default function Products() {
                                         </Button>
                                         &nbsp;
                                         <Button 
-                                            variant='primary'
+                                            variant='danger'
                                             className='w-50'
                                             type='button'
                                             onClick={() => deleteProductHandler(item)}

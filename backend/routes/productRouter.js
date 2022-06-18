@@ -39,6 +39,7 @@ productRouter.put('/:id',
             product.name = req.body.name;
             product.slug = req.body.slug;
             product.image = req.body.image;
+            product.price = req.body.price;
             product.brand = req.body.brand;
             product.category = req.body.category;
             product.description = req.body.description;

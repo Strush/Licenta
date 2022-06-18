@@ -57,7 +57,7 @@ userRouter.put('/:id',
             user.email = req.body.email || user.email,
             user.isAdmin = Boolean(req.body.isAdmin)
             const updateUser = await user.save();
-            res.send({message: 'Utilizatorul a fost modficat cu success', updateUser});
+            res.send({message: 'Utilizatorul a fost modficat cu success', updateUse});
         } else {
             res.status(404).send({message: 'Utilizatorul nu a fost gasit'});
         }
@@ -103,5 +103,23 @@ userRouter.put('/profile', isAuth, expressAsyncHandler(async (req,res) => {
         res.status(404).send({message: 'Nu exista asa utilizator'});
     }
 }));
+
+userRouter.delete('/:id', 
+    isAuth,
+    isAdmin,
+    expressAsyncHandler(async (req, res) => {
+        const user = await User.findById(req.params.id);
+        if(user){
+            if(user.email === "vinagapetru11@gamil.com"){
+                res.send({message: 'Nu poti stergi administratorul'});
+                return;
+            }
+            await user.remove();
+            res.send({message: 'Utilizatorul a fost sters cu success'});
+        } else {
+            res.status(404).send({message: 'Nu exista asa utilizator'})
+        }
+    })
+)
 
 export default userRouter;
