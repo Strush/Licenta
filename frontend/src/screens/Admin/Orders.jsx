@@ -82,7 +82,7 @@ export default function Orders() {
                         <td>{item.createdAt.substring(0, 10)}</td>
                         <td>{item.totalPrice}Ron</td>
                         <td>{item.isPaid ? item.createdAt.substring(0, 10) : 'Nu'}</td>
-                        <td>{item.isDelivered ? 'Da' : 'Nu'}</td>
+                        <td>{item.isDelivered ? item.deliveredAt.substring(0, 10) : 'Nu'}</td>
                         <td>
                             <Button variant='primary' className='w-100'>
                                 <Link className='text-white' to={`/order/${item._id}`} >

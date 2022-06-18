@@ -15,6 +15,22 @@ orderRouter.get('/',
     res.send(orders);
 }));
 
+orderRouter.put('/:id/deliver', 
+    isAuth,
+    isAdmin, 
+    expressAsyncHandler(async (req,res) => {
+        const order = await Order.findById(req.params.id);
+        if(order){
+            order.isDelivered = true;
+            order.deliveredAt = Date.now();
+            await order.save()
+            res.send({message: 'Produsul a fost livrat'});
+        } else {
+            res.status(404).send({message: 'Comanda nu a fost gasita!'});
+        }
+    })
+)
+
 orderRouter.post('/', isAuth, expressAsyncHandler(async (req,res) => {
     const newOrder = new Order({
         orderItems: req.body.orderItems.map((x) => ({...x, product: x._id})),

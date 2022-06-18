@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useReducer } from 'react'
-import { Card, Col, Row } from 'react-bootstrap';
+import { Button, Card, Col, Row } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
@@ -29,6 +29,15 @@ const reducer = (state,action) => {
         case 'PAY_RESET':
             return {...state, loadingPay: false, successPay: false}
         
+        case 'DELIVERED_REQUEST':
+            return {...state, loadingDelivered: true}
+        case 'DELIVERED_SUCCESS':
+            return {...state, loadingDelivered: false, successDelivered: true}
+        case 'DELIVERED_FAIL': 
+            return {...state, loadingDelivered: false}
+        case 'DELIVERED_RESET':
+            return {...state, loadingDelivered: false, successDelivered: false}
+
         default: 
             return state;  
     }
@@ -46,7 +55,7 @@ function OrderDetails() {
     // isPending default este false
     const [{isPending}, paypalDispatch] = usePayPalScriptReducer();
 
-    const [{loading, error, order,successPay,loadingPay}, dispatch] = useReducer(reducer, {
+    const [{loading, error, order,loadingDelivered, successDelivered, successPay, loadingPay}, dispatch] = useReducer(reducer, {
         loading: true,
         order: {},
         successPay: false,
@@ -75,11 +84,16 @@ function OrderDetails() {
             return navigate('/login');
         }
 
-        if (!order._id || successPay || (order._id && order._id !== orderId)) {
+        if (!order._id || successPay || successDelivered || (order._id && order._id !== orderId)) {
             fetchData();
             if(successPay){
                 dispatch({type: 'PAY_RESET'});
             }
+
+            if(successDelivered){
+                dispatch({type: 'DELIVERED_RESET'});
+            }
+
         } else {
             const paidOrder = async () => {
 
@@ -109,7 +123,7 @@ function OrderDetails() {
             paidOrder();
         }
 
-    },[order,userInfo,orderId,navigate,paypalDispatch,successPay]);
+    },[order,userInfo,orderId,navigate,paypalDispatch,successPay,successDelivered]);
 
     const createOrder = (data,actions) => {
         return actions.order.create({
@@ -141,6 +155,26 @@ function OrderDetails() {
     const onError = (err) => {
         toast.error(getError(err));
     }
+
+    const deliveredHandler = async () => {
+        try {
+            dispatch({type: "DELIVERED_REQUEST"});
+
+            const {data} = await axios.put(`/api/orders/${orderId}/deliver`, {
+
+            }, {
+                headers: {
+                    Authorization: `Bearer ${userInfo.token}`
+                }
+            });
+            toast.success('Produsul a fost livrat cu success');
+            dispatch({type: "DELIVERED_SUCCESS", payload: data});
+        } catch (err){  
+            toast.error(getError(err));
+            dispatch({type: "DELIVERED_FAIL"});
+        }
+    }
+
 
     return loading ? (<LoadingBox />) : 
         error ? (<Messagebox variant="danger">{error}</Messagebox>) : 
@@ -234,6 +268,19 @@ function OrderDetails() {
                                     {loadingPay && <LoadingBox />}
                                 </div>
                             )}
+                            {
+                                userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                                    <>
+                                        { loadingDelivered && <LoadingBox />}
+                                        <Button variant='success'
+                                            className='w-100'
+                                            onClick={deliveredHandler}
+                                        >
+                                            Livreaza produsul
+                                        </Button>
+                                    </>
+                                )
+                            }
                         </Card.Body>
                         </Card>
                     </Col>
