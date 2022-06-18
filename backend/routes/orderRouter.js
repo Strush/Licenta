@@ -31,6 +31,20 @@ orderRouter.put('/:id/deliver',
     })
 )
 
+orderRouter.delete('/:id', 
+    isAuth,
+    isAdmin,
+    expressAsyncHandler( async (req,res) => {
+        const order = await Order.findById(req.params.id);
+        if(order){
+            order.remove();
+            res.send({message: 'Comanda a fost stearsa cu succes'});
+        } else {
+            res.status(404).send({message: 'Comanda nu a fost gasita'});
+        }
+    })
+)
+
 orderRouter.post('/', isAuth, expressAsyncHandler(async (req,res) => {
     const newOrder = new Order({
         orderItems: req.body.orderItems.map((x) => ({...x, product: x._id})),

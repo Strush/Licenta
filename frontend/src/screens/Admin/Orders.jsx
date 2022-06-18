@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useReducer } from 'react'
 import { Button, Table } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import LoadingBox from '../../components/LoadingBox';
 import Messagebox from '../../components/MessageBox';
 import { Store } from '../../Store';
@@ -17,6 +18,16 @@ const reducer = (state, action) => {
             return {...state, orders: action.payload, loading: false}
         case "FETCH_FAIL":
             return {...state, error: action.payload, loading: false}
+
+        case "DELETE_REQUEST":
+            return {...state, loadingDelete: true, successDelete: false}
+        case "DELETE_SUCCESS":
+            return {...state, loadingDelete: false, successDelete: true}
+        case "DELETE_FAIL":
+            return {...state, loadingDelete: false, successDelete: false}
+        case "DELETE_RESET":
+            return {...state, loadingDelete: false, successDelete: false}
+            
         default: 
             return state;
     }
@@ -27,7 +38,7 @@ export default function Orders() {
     const {state} = useContext(Store);
     const {userInfo} = state;
 
-    const [{loading, error, orders}, dispatch] = useReducer(reducer, {
+    const [{loading, error, orders,loadingDelete,successDelete}, dispatch] = useReducer(reducer, {
         loading: true,
         error: ''
     })
@@ -47,8 +58,31 @@ export default function Orders() {
                 dispatch({type: 'FETCH_FAIL', payload: getError(err)})
             }
         }
-        fetchData();
-    }, [userInfo])
+
+        if(successDelete) {
+            dispatch({type: 'DELETE_RESET'});
+        } else {
+            fetchData();
+        }
+
+    }, [userInfo,successDelete]);
+
+    const deleteHandler = async (order) => {
+        if(window.confirm('Sigur doresti sa stergi produsul')){
+            try {
+                const {data} = await axios.delete(`/api/orders/${order._id}`, {
+                    headers: {
+                        Authorization: `Bearer ${userInfo.token}`
+                    }
+                });
+                toast.error('Comanda a fost stearsa cu success!')
+                dispatch({type: 'DELETE_SUCCESS', payload: data});
+            } catch (err){
+                toast.error(getError(err))
+                dispatch({type: 'DELETE_FAIL'});
+            }
+        }
+    }
 
   return (
     <div>
@@ -56,6 +90,7 @@ export default function Orders() {
         <title>Toate comenzile</title>
       </Helmet>
       <h1 className='mb-3'>Comenzi</h1>
+      {loadingDelete && <LoadingBox />}
       { loading ? (<LoadingBox/>) 
         :
         error ? (<Messagebox variant="danger">{error}</Messagebox>) 
@@ -83,11 +118,19 @@ export default function Orders() {
                         <td>{item.totalPrice}Ron</td>
                         <td>{item.isPaid ? item.createdAt.substring(0, 10) : 'Nu'}</td>
                         <td>{item.isDelivered ? item.deliveredAt.substring(0, 10) : 'Nu'}</td>
-                        <td>
-                            <Button variant='primary' className='w-100'>
+                        <td className='d-flex'>
+                            <Button variant='primary' className='w-50'>
                                 <Link className='text-white' to={`/order/${item._id}`} >
                                     Vezi
                                 </Link>
+                            </Button>
+                            &nbsp;
+                            <Button 
+                                variant='danger' 
+                                className='w-50'
+                                onClick={() => deleteHandler(item)}
+                            >
+                                Sterge
                             </Button>
                         </td>
                     </tr>
