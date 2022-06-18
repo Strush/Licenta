@@ -1,4 +1,4 @@
-import express, { query } from "express";
+import express from "express";
 import Product from "../models/productModel.js";
 import expressAsyncHandler from 'express-async-handler';
 import { isAdmin, isAuth } from "../utils.js";
@@ -52,6 +52,20 @@ productRouter.put('/:id',
         }
     })
 )
+
+productRouter.delete('/:id', 
+    isAuth, 
+    isAdmin,
+    expressAsyncHandler(async (req, res) => {
+    const product = await Product.findById(req.params.id);
+    if(product){
+        await product.remove();
+        res.send({message: 'Produsul a fost sters cu succes'});
+    } else {
+        res.status(404).send({message: 'Produsul nu a fost gasit'});
+    }
+
+}))
 
 // Search
 productRouter.get('/search', expressAsyncHandler(async (req,res) => {

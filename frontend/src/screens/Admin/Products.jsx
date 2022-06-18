@@ -36,6 +36,15 @@ const reducer = (state, action) => {
         case 'CREATE_FAIL':
             return {...state, loadingCreate: false}
 
+        case 'DELETE_REQUEST': 
+            return {...state, loadingDelete: true, successDelete: false}
+        case 'DELETE_SUCCESS': 
+            return {...state, loadingDelete: false, successDelete: true}
+        case 'DELETE_FAIL':
+            return {...state, loadingDelete: false, successDelete: false}
+        case 'DELETE_RESET':
+            return {...state, loadingDelete: false, successDelete: false}
+
         default: 
             return state;
     }
@@ -45,7 +54,7 @@ export default function Products() {
 
     const navigate = useNavigate();
 
-    const [{loading, error, pages, products,loadingCreate}, dispatch] = useReducer(reducer, {
+    const [{loading, error, pages, products,loadingCreate,loadingDelete,successDelete}, dispatch] = useReducer(reducer, {
         loading: true,
         loadingCreate: false,
         error: ''
@@ -71,8 +80,13 @@ export default function Products() {
                 dispatch({type: 'FECTH_FAIL', payload: getError(err)})
             }
         }
-        fecthData();
-    },[page, userInfo]);
+        if(successDelete){
+            dispatch({type: 'DELETE_RESET'});
+        } else {
+            fecthData();
+        }
+
+    },[page, userInfo,successDelete]);
 
     const createProductHandler = async () => {
         try {
@@ -90,6 +104,25 @@ export default function Products() {
         } catch (err) {
             dispatch({type: 'CREATE_FAIL'});
             toast.error(err);
+        }
+    }
+
+    const deleteProductHandler = async (product) => {
+        if(window.confirm('Sigur vrei sa stergi produsul?')){
+            try {
+                dispatch({type: 'DELETE_REQUEST'});
+                await axios.delete(`/api/products/${product._id}`, {
+                    headers: {
+                        Authorization: `Bearer ${userInfo.token}`
+                    }
+                });
+                toast.success('Produsul a fost sters cu success');
+                dispatch({type: 'DELETE_SUCCESS'});
+                
+            } catch (err) {
+                toast.error(getError(err));
+                dispatch({type: 'DELETE_FAIL'});
+            }
         }
     }
 
@@ -111,6 +144,9 @@ export default function Products() {
             </Col>
         </Row>
   
+        {loadingCreate && <LoadingBox />}
+        {loadingDelete && <LoadingBox />}
+
         { loading 
             ? (<LoadingBox />) 
             : error ? <Messagebox variant="danger">{error}</Messagebox> 
@@ -141,11 +177,19 @@ export default function Products() {
                                     <td>{item.countInStock} produse</td>
                                     <td>{item.category}</td>
                                     <td>{item.brand}</td>
-                                    <td>
-                                        <Button variant='primary'>
+                                    <td className='d-flex justify-content-between'>
+                                        <Button variant='primary' className='w-50'>
                                             <Link className='text-white' to={`/admin/product/${item._id}`}>
                                                 Edit
                                             </Link>
+                                        </Button>
+                                        &nbsp;
+                                        <Button 
+                                            variant='primary'
+                                            className='w-50'
+                                            type='button'
+                                            onClick={() => deleteProductHandler(item)}
+                                        > Sterge
                                         </Button>
                                     </td>
                                 </tr>
