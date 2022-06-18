@@ -23,6 +23,7 @@ import Products from './screens/Admin/Products';
 import ProductDetails from './screens/Admin/ProductDetails';
 import Orders from './screens/Admin/Orders';
 import ListUsers from './screens/Admin/ListUsers';
+import UserEdit from './screens/Admin/UserEdit';
 
 function App() {
   
@@ -54,6 +55,7 @@ function App() {
               <Route path='/admin/products' element={<AdminRoute><Products /></AdminRoute>} />
               <Route path='/admin/orders' element={<AdminRoute><Orders /></AdminRoute>} />
               <Route path='/admin/users' element={<AdminRoute><ListUsers /></AdminRoute>} />
+              <Route path='/admin/user/:id' element={<AdminRoute><UserEdit /></AdminRoute>} />
               <Route path='/admin/product/:id' element={<AdminRoute><ProductDetails /></AdminRoute>} />
 
               <Route path='/' element={<FrontPage />} />

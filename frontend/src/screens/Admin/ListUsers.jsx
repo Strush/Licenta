@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useContext, useEffect, useReducer } from 'react'
 import { Button, Table } from 'react-bootstrap'
 import { Helmet } from 'react-helmet-async'
+import { Link } from 'react-router-dom'
 import LoadingBox from '../../components/LoadingBox'
 import Messagebox from '../../components/MessageBox'
 import { Store } from '../../Store'
@@ -79,7 +80,7 @@ export default function ListUsers() {
                             <td>{user.isAdmin ? 'DA' : 'NU'}</td>
                             <td className='d-flex'>
                                 <Button variant='primary' className='w-50'>
-                                    Modifica
+                                    <Link className='text-white' to={`/admin/user/${user._id}`}>Modifica</Link>
                                 </Button>
                                 &nbsp;
                                 <Button variant='danger' className='w-50'>

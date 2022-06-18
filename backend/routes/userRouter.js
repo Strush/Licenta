@@ -34,6 +34,36 @@ userRouter.get('/',
     })
 )
 
+userRouter.get('/:id', 
+    isAuth,
+    isAdmin,
+    expressAsyncHandler(async (req, res) => {
+        const user = await User.findById(req.params.id);
+        if(user){
+            res.send(user);
+        } else {
+            res.status(404).send({message: 'Utilizatorul nu a fost gasit'})
+        }
+    })
+);
+
+userRouter.put('/:id', 
+    isAuth,
+    isAdmin,
+    expressAsyncHandler(async (req, res) => {
+        const user = await User.findById(req.params.id);
+        if(user){
+            user.name = req.body.name || user.name,
+            user.email = req.body.email || user.email,
+            user.isAdmin = Boolean(req.body.isAdmin)
+            const updateUser = await user.save();
+            res.send({message: 'Utilizatorul a fost modficat cu success', updateUser});
+        } else {
+            res.status(404).send({message: 'Utilizatorul nu a fost gasit'});
+        }
+    })
+);
+
 userRouter.post('/signup', expressAsyncHandler(async (req,res) => {
     const newUser = await new User({
         name: req.body.name,
