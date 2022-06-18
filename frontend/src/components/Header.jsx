@@ -89,6 +89,9 @@ return (
 								<LinkContainer to="/admin/orders">
 									<NavDropdown.Item>Comenzi</NavDropdown.Item>
 								</LinkContainer>
+								<LinkContainer to="/admin/users">
+									<NavDropdown.Item>Ultilizatori</NavDropdown.Item>
+								</LinkContainer>
 							</NavDropdown>
 						</div>
 					) : ''}

@@ -1,5 +1,5 @@
 import express from "express";
-import {generateToken, isAuth} from "../utils.js";
+import {generateToken, isAdmin, isAuth} from "../utils.js";
 import expressAsyncHandler from 'express-async-handler';
 import User from "../models/userModal.js";
 import bcrypt from 'bcryptjs';
@@ -24,6 +24,15 @@ userRouter.post('/signin', expressAsyncHandler(async (req,res) => {
         }
     })
 );
+
+userRouter.get('/', 
+    isAuth, 
+    isAdmin,
+    expressAsyncHandler(async (req, res) => {
+        const users  = await User.find({});
+        res.send(users);
+    })
+)
 
 userRouter.post('/signup', expressAsyncHandler(async (req,res) => {
     const newUser = await new User({
