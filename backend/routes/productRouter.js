@@ -199,6 +199,40 @@ productRouter.get('/:id', async (req,res) => {
     } else {
         res.status(404).send({message: 'Produsul nu a fost gasit'});
     }
-})
+});
+
+productRouter.post('/:id/reviews',
+    isAuth,
+    expressAsyncHandler (async (req, res) => {
+        const product = await Product.findById(req.params.id);
+        if(product){    
+            if(product.reviews.find((x) => x.name === req.user.name)){
+                return res.status(400).send({message: 'Ati lasat o recenzie deja pentru acest produs'});
+            }
+
+            const review = {
+                name: req.user.name,
+                rating: Number(req.body.rating),
+                comment: req.body.comment
+            }
+
+            product.reviews.push(review);
+            product.numReviews = product.reviews.length;
+            product.rating = product.reviews.reduce((a,c) => c.rating + a, 0 ) / product.reviews.length;
+
+            const updataProduct = await product.save();
+
+            res.status(201).send({
+                message: 'Recenzia a fost creata cu success',
+                review: updataProduct.reviews[updataProduct.reviews.length - 1],
+                numReviews: product.numReviews,
+                rating: product.rating
+            });
+
+        } else {
+            res.status(404).send({message: 'Produsul nu a fost gasit'});
+        }
+    })
+)
 
 export default productRouter;

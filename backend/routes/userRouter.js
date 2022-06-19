@@ -57,7 +57,7 @@ userRouter.put('/:id',
             user.email = req.body.email || user.email,
             user.isAdmin = Boolean(req.body.isAdmin)
             const updateUser = await user.save();
-            res.send({message: 'Utilizatorul a fost modficat cu success', updateUse});
+            res.send({message: 'Utilizatorul a fost modficat cu success', updateUser});
         } else {
             res.status(404).send({message: 'Utilizatorul nu a fost gasit'});
         }
@@ -110,12 +110,13 @@ userRouter.delete('/:id',
     expressAsyncHandler(async (req, res) => {
         const user = await User.findById(req.params.id);
         if(user){
-            if(user.email === "vinagapetru11@gamil.com"){
+            if(user.email === "vinagapetru11@gmail.com"){
                 res.send({message: 'Nu poti stergi administratorul'});
                 return;
+            } else {
+                await user.remove();
+                res.send({message: 'Utilizatorul a fost sters cu success'});
             }
-            await user.remove();
-            res.send({message: 'Utilizatorul a fost sters cu success'});
         } else {
             res.status(404).send({message: 'Nu exista asa utilizator'})
         }
