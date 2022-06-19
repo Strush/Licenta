@@ -5,6 +5,8 @@ import { Link, useParams } from 'react-router-dom';
 import getError from '../utils';
 import LoadingBox from '../components/LoadingBox';
 import Messagebox from '../components/MessageBox';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faPenToSquare} from '@fortawesome/free-regular-svg-icons';
 import Rating from '../components/Rating';
 import {Store} from '../Store';
 import { Badge, Button, FloatingLabel, Form, ListGroup, ListGroupItem } from 'react-bootstrap';
@@ -127,7 +129,14 @@ function SingleProduct() {
           <div className='px-3 px-lg-0'>
             <div className='product__content'>
               <div>          
-                <h2 className='title mb-3'>{product.name}</h2>
+                <h2 className='title mb-3 d-flex'>
+                  {product.name} &nbsp; 
+                  {userInfo && userInfo.isAdmin ? 
+                    (<Link to={`/admin/product/${product._id}`}>
+                    <FontAwesomeIcon icon={faPenToSquare} className='me-2' /></Link>) 
+                    : ''
+                  }
+                </h2>
                 <h4 className='price mb-3'>Pretul: <strong>{product.price} lei</strong></h4>
                   <div className='rating-box'>
                     <Rating rating={product.rating} numReviews={product.numReviews} />
