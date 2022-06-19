@@ -16,7 +16,7 @@ productRouter.post('/',
     const newProduct = new Product({
         name: 'demo' + Date.now(),
         slug: 'demo-slug' + Date.now(),
-        image: 'no image',
+        image: 'https://res.cloudinary.com/eoomi/image/upload/v1655655293/1655654770_2_z1qsk7.png',
         brand: 'demo',
         category: 'demo',
         description: 'demo descriere',
@@ -39,6 +39,7 @@ productRouter.put('/:id',
             product.name = req.body.name;
             product.slug = req.body.slug;
             product.image = req.body.image;
+            product.images = req.body.images;
             product.price = req.body.price;
             product.brand = req.body.brand;
             product.category = req.body.category;

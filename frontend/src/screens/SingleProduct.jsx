@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faPenToSquare} from '@fortawesome/free-regular-svg-icons';
 import Rating from '../components/Rating';
 import {Store} from '../Store';
-import { Badge, Button, FloatingLabel, Form, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Badge, Button, Card, Col, FloatingLabel, Form, ListGroup, ListGroupItem, Row } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
 const reducer = (state, action) => {
@@ -43,6 +43,7 @@ function SingleProduct() {
 
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
+  const [selectedImages, setSelectedImages] = useState('');
 
   const [{loading,product,error,loadingCreate},dispatch] = useReducer(reducer,{
     loading: true,
@@ -124,7 +125,10 @@ function SingleProduct() {
       { loading ? (<LoadingBox />) : error ? (<Messagebox variant="danger">{error}</Messagebox>) : (
         <div className="single__product">
           <div className='product__thumbnail'>
-              <img className='product__img' src={product.image} alt="No Image"></img>
+              <img className='product__img' 
+                src={selectedImages || product.image} 
+                alt="No Image" 
+              />
           </div>   
           <div className='px-3 px-lg-0'>
             <div className='product__content'>
@@ -141,6 +145,27 @@ function SingleProduct() {
                   <div className='rating-box'>
                     <Rating rating={product.rating} numReviews={product.numReviews} />
                   </div>
+
+                <ListGroup>
+                  <ListGroup.Item>
+                    <Row xs={1} md={2} className='g-2'>
+                      {
+                        [product.image, ...product.images].map((img) => (
+                          <Col key={img}>
+                            <Card>
+                              <Card.Img
+                                variant='top'
+                                src={img}
+                                onClick={() => setSelectedImages(img)}
+                                alt="product"
+                              />
+                            </Card>
+                          </Col>
+                        ))
+                      }
+                    </Row>
+                  </ListGroup.Item>
+                </ListGroup>
               </div>
               <div className='product__cart'>
                 <h5 className='mb-3 item-flex'>Pretul: <strong>{product.price}lei</strong></h5>

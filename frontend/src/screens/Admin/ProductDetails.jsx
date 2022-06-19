@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useReducer, useState } from 'react'
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, ListGroup } from 'react-bootstrap';
 import { Helmet } from 'react-helmet-async'
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import LoadingBox from '../../components/LoadingBox';
 import Messagebox from '../../components/MessageBox';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faTimes} from '@fortawesome/free-solid-svg-icons';
 import { Store } from '../../Store';
 import getError from '../../utils';
 
@@ -52,6 +54,7 @@ export default function ProductDetails() {
     const [name, setName] = useState('');
     const [slug, setSlug] = useState('');
     const [image, setImage] = useState('');
+    const [images, setImages] = useState([]);
     const [brand, setBrand] = useState('');
     const [category, setCategory] = useState('');
     const [description, setDescription] = useState('');
@@ -68,6 +71,7 @@ export default function ProductDetails() {
                 setName(data.name);
                 setSlug(data.slug);
                 setImage(data.image);
+                setImages(data.images);
                 setBrand(data.brand);
                 setCategory(data.category);
                 setDescription(data.description);
@@ -95,6 +99,7 @@ export default function ProductDetails() {
                 name,
                 slug,
                 image,
+                images,
                 brand,
                 category,
                 description,
@@ -116,7 +121,7 @@ export default function ProductDetails() {
         }
     }
 
-    const uploadImageFile = async (e) => {
+    const uploadImageFile = async (e, fromImages) => {
         const file = e.target.files[0];
         const bodyFormData = new FormData;
         bodyFormData.append('file',file);
@@ -129,12 +134,23 @@ export default function ProductDetails() {
                 }
             });
             dispatch({type: 'UPLOAD_SUCCESS'});
-            toast.success('Imaginea a fost incarcata cu success');
-            setImage(data.secure_url);
+    
+            if(fromImages){
+                setImages([...images, data.secure_url]);
+            } else {
+                setImage(data.secure_url);
+            }
+            toast.success('Imaginea a fost incarcata cu success.');
+
         } catch(err){
             toast.error(err);
             dispatch({type: 'UPLOAD_FAIL', payload: getError(err)});
         }
+    }
+
+    const deleteImageHandler = async (fileName) => {
+        setImages(images.filter((image) => image !== fileName));
+        toast.success('Imaginea a fost stearsa cu success');
     }
 
     return (
@@ -168,7 +184,7 @@ export default function ProductDetails() {
                 />
             </Form.Group>
             <Form.Group controlId="image" className='mb-3 mb-sm-4'>
-                <Form.Label>Image</Form.Label>
+                <Form.Label>Imagine</Form.Label>
                 <Form.Control 
                     type="text"
                     value={image}
@@ -184,6 +200,35 @@ export default function ProductDetails() {
                 />
                 {Uploadloading && <LoadingBox />}
             </Form.Group>
+
+            <Form.Group controlId="gallery" className='mb-3 mb-sm-4'>
+                <Form.Label>Galerie</Form.Label>
+                {console.log(images)}
+                {images.length === 0 && <Messagebox>Nu ai incarcat nici o imagine in galerie</Messagebox>}
+                <ListGroup variant='flush'>
+                    {
+                        images.map((image) => (
+                            <ListGroup.Item key={image}>
+                                {image}
+                                <FontAwesomeIcon icon={faTimes} className='me-2'
+                                    onClick={() => deleteImageHandler(image)}
+                                />
+
+                            </ListGroup.Item>
+                        ))
+                    }
+
+                </ListGroup>
+            </Form.Group>
+            <Form.Group controlId="uploadGallery" className='mb-3 mb-sm-4'>
+                <Form.Label>Incarca o galerie de imagini</Form.Label>
+                <Form.Control 
+                    type="file"
+                    onChange={(e) => uploadImageFile(e,true)}
+                />
+                {Uploadloading && <LoadingBox />}
+            </Form.Group>
+
             <Form.Group controlId="brand" className='mb-3 mb-sm-4'>
                 <Form.Label>Brand</Form.Label>
                 <Form.Control 
