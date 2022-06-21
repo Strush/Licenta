@@ -2,11 +2,10 @@ import React, { useContext } from 'react'
 import { Helmet } from 'react-helmet-async';
 import { Link, useNavigate } from 'react-router-dom';
 import { Store } from '../Store';
-import minus from '../images/minus.svg';
-import plus from '../images/plus.svg';
-import trash from '../images/trash.svg';
 import axios from 'axios';
 import { Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faTrash,faPlus,faMinus} from '@fortawesome/free-solid-svg-icons';
 
 export default function Cart() {
     const navigate = useNavigate();
@@ -49,37 +48,41 @@ export default function Cart() {
                         <div className='thumbnail'>
                             <img src={item.image} alt={item.name} />
                         </div>
-                        <div className='name'>
+                        <div className='name text-ellipsis'>
                             <Link to={`/product/${item.slug}`} className='title'>{item.name}</Link>
                         </div>
                         <div className='controls'>
-                            <Button variant='light' className='icon mr-8' 
+                            <Button variant='flush' className='icon mr-8' 
                                 disabled={item.quantity === 1}
                                 onClick={() => updateCartHandler (item,item.quantity - 1)}
                             >
-                                <img src={minus} alt="Minus icon" />
+                                 <FontAwesomeIcon icon={faMinus} />
                             </Button>
                             <div className='quantity'>{item.quantity}</div>
-                            <Button variant='light' className='icon ml-8' 
+                            <Button variant='flush' className='icon ml-8' 
                                 disabled={item.quantity === item.countInStock}
                                 onClick={() => updateCartHandler (item,item.quantity + 1)}
                             >
-                                <img src={plus} alt="Plus icon" />
+                                <FontAwesomeIcon icon={faPlus} />
                             </Button>
                         </div>
                         <div className='price'>
                             <p>{item.price} lei</p>
                         </div>
-                        <Button variant='light' className='icon trash' onClick={() => removeProduct(item)}>
-                            <img src={trash} alt="Trash icon" />
+                        <Button variant='flush' className='icon trash' onClick={() => removeProduct(item)}>
+                            <FontAwesomeIcon icon={faTrash} />
                         </Button>
                     </div>
                 ))}
                 </div>
                 {}
                 <div className='cart__checkout'>
-                    <div className='quantity mb-3 mb-sm-4'>Cantitatea: <strong>{cartItems.reduce((a,c) => a + c.quantity, 0)}</strong></div>
-                    <div className='price mb-3 mb-sm-4'>Pretul: <strong>{cartItems.reduce((a,c) => a + c.price * c.quantity,0)} lei</strong></div>
+                    <div className='quantity mb-3 mb-sm-4'>
+                        Cantitatea: <strong>{cartItems.reduce((a,c) => a + c.quantity, 0)}</strong>
+                    </div>
+                    <div className='price mb-3 mb-sm-4'>Pretul: 
+                        <strong>{cartItems.reduce((a,c) => a + c.price * c.quantity,0)} lei</strong>
+                    </div>
                     <Button variant="primary w-100" onClick={checkoutHandler}>Cumpără</Button>
                 </div>
             </>
