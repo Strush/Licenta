@@ -73,7 +73,7 @@ function ProductScreen(){
                             </Link>
                             <div className="content">
                                 <Link to={`/product/${product.slug}`} className="name">
-                                    <p>{product.name}</p>
+                                    <p className="text-ellipsis">{product.name}</p>
                                  </Link>
                                 <p className="price"><strong>{product.price} lei</strong></p>
                                 {(product.countInStock > 0) ? (<Button variant="primary" className="w-100" onClick={() => addToCart(product)}>           

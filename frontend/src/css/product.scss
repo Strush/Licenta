@@ -34,7 +34,7 @@
     background-color: #fff; 
     height: 400px;
     display: flex;
-    align-items: center;
+   align-items: center;
     position: relative;
     // border: 1px solid #ccc; 
 
@@ -48,7 +48,19 @@
 
   .product__content {
     display: flex;
+    column-gap: 30px;
     justify-content: space-between;
+  }
+  .view-uploads__card {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    padding: 3px;
+    background-color: #fff;
+  }
+  .view-uploads__image {
+    height: inherit;
+    object-fit: cover;
   }
 
   .product__cart {

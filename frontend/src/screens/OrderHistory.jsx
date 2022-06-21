@@ -55,19 +55,21 @@ export default function OrderHistory() {
 			</Helmet>
       	<h1 className='mb-4'>Istoric comenzi</h1>
 		{loading ? (<LoadingBox />) : error ? (<Messagebox />) : (
-			<Table bordered hover>
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>ID</th>
-						<th>Data</th>
-						<th>Prețul</th>
-						<th>Achitat</th>
-						<th>Livrat</th>
-						<th>Detalii</th>
-					</tr>
-				</thead>
-				<tbody>
+			<>
+			{orders.length !== 0 ? (
+				<Table bordered hover>
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>ID</th>
+							<th>Data</th>
+							<th>Prețul</th>
+							<th>Achitat</th>
+							<th>Livrat</th>
+							<th>Detalii</th>
+						</tr>
+					</thead>
+					<tbody>
 						{orders.map((item,index) => (
 							<tr key={item._id}>
 								<td>{index}</td>
@@ -79,8 +81,12 @@ export default function OrderHistory() {
 								<td><Button variant='secondary' className='w-100' onClick={() => navigate(`/order/${item._id}`)}>Detalii</Button></td>
 							</tr>
 						))}
-				</tbody>
-			</Table>
+					</tbody>
+				</Table>
+			) : (
+				<p>Nu există comenzii</p>
+			)}
+			</>
 		)}
     </div>
   )

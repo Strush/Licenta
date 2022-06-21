@@ -14,12 +14,12 @@ productRouter.post('/',
     isAuth, 
     isAdmin, expressAsyncHandler( async (req,res) => {
     const newProduct = new Product({
-        name: 'demo' + Date.now(),
-        slug: 'demo-slug' + Date.now(),
+        name: 'Demo ' + Date.now(),
+        slug: 'Demo-slug ' + Date.now(),
         image: 'https://res.cloudinary.com/eoomi/image/upload/v1655655293/1655654770_2_z1qsk7.png',
-        brand: 'demo',
-        category: 'demo',
-        description: 'demo descriere',
+        brand: 'Demo',
+        category: 'Demo',
+        description: 'Demo',
         price: 0,
         countInStock: 0,
         rating: 0,
@@ -166,7 +166,7 @@ productRouter.get('/admin',
     expressAsyncHandler(async (req,res) => {
         const {query} = req;
         const page = query.page || 1;
-        const pageSize = query.pageSize || 3;
+        const pageSize = query.pageSize || 12;
 
         const products = await 
             Product.find()

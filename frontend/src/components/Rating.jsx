@@ -68,7 +68,7 @@ function Rating (props) {
             {caption ? (
                 <span>{caption}</span>
             ) : (
-                <span>{' ' + numReviews + 'vizualizari'}</span>
+                <span>{' ' + (numReviews === 1) ? numReviews + ' recenzie' :  numReviews +  'recenzii'}</span>
             )}
         </div>
     );

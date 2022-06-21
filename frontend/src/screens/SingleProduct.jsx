@@ -132,7 +132,7 @@ function SingleProduct() {
           </div>   
           <div className='px-3 px-lg-0'>
             <div className='product__content'>
-              <div>          
+              <div className='w-100'>          
                 <h2 className='title mb-3 d-flex'>
                   {product.name} &nbsp; 
                   {userInfo && userInfo.isAdmin ? 
@@ -142,20 +142,19 @@ function SingleProduct() {
                   }
                 </h2>
                 <h4 className='price mb-3'>Pretul: <strong>{product.price} lei</strong></h4>
-                  <div className='rating-box'>
+                  <div className='rating-box mb-3'>
                     <Rating rating={product.rating} numReviews={product.numReviews} />
                   </div>
 
-                <ListGroup>
-                  <ListGroup.Item>
-                    <Row xs={1} md={2} className='g-2'>
+                    <Row xs={2} md={4} className='g-2'>
                       {
                         [product.image, ...product.images].map((img) => (
                           <Col key={img}>
-                            <Card>
+                            <Card className='view-uploads__card'>
                               <Card.Img
-                                variant='top'
+                                variant='full'
                                 src={img}
+                                className="view-uploads__image"
                                 onClick={() => setSelectedImages(img)}
                                 alt="product"
                               />
@@ -164,11 +163,9 @@ function SingleProduct() {
                         ))
                       }
                     </Row>
-                  </ListGroup.Item>
-                </ListGroup>
               </div>
               <div className='product__cart'>
-                <h5 className='mb-3 item-flex'>Pretul: <strong>{product.price}lei</strong></h5>
+                <h5 className='mb-3 item-flex'>Prețul: <strong>{product.price} lei</strong></h5>
                 <div className='status item-flex w-full'>
                   <h5>Status:</h5>
                   <h5>
@@ -181,10 +178,10 @@ function SingleProduct() {
             <p className='description mt-3'><strong>Descriere:</strong> {product.description}</p>
           </div>
           <div>
-            <div className='my-3'>
+            <div className='mb-3'>
               <h3 ref={reviewsRef} className="mb-3">Recenzii</h3>
               <div className='mb-3'>
-                {product.reviews.length === 0 && (<Messagebox>Nu exista nici o recenzie</Messagebox>)}
+                {product.reviews.length === 0 && (<Messagebox>Nu există nici o recenzie</Messagebox>)}
               </div>
 
               <ListGroup>
@@ -201,10 +198,10 @@ function SingleProduct() {
               {userInfo ? (
                 <div className='mb-3'>
                   {product.reviews.find((user) => user.name === userInfo.name) ? 
-                  (<h4>Ati lasa o recenzie pentru acest produs</h4>)
+                  (<h4>Ați lăsat o recenzie pentru acest produs</h4>)
                   : (
                     <>
-                      <h3 className='mb-3'>Lasati o recenzie</h3>
+                      <h3 className='mb-3'>Lăsați o recenzie</h3>
                       <form onSubmit={createRewiewHandler}>
                         <Form.Group controlId="rating" className='mb-3 mb-sm-4'>
                             <Form.Label>Rating</Form.Label>
@@ -215,7 +212,7 @@ function SingleProduct() {
                             >
                               <option value="0">Select...</option>
                               <option value="1">1 - Negativ</option>
-                              <option value="2">2 - Rau</option>
+                              <option value="2">2 - Rău</option>
                               <option value="3">3 - Bun</option>
                               <option value="4">4 - Foarte bun</option>
                               <option value="5">5 - Excelent</option>

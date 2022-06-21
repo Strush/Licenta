@@ -44,6 +44,10 @@ h1, h2, h3,h4,h5 {
   margin-left: 8px;
 }
 
+.mt-6 {
+  margin-top: 6px;
+}
+
 /* Spinner */
 .loading-box {
   width: 65px;
@@ -104,4 +108,16 @@ svg {
   grid-template-columns: 1fr 0.5fr;
   margin-bottom: 20px;
   grid-gap: 20px;
+}
+
+/* Text ellipsis */
+.text-ellipsis {
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  font-size: 16px;
+  line-height: 24px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  white-space: normal;
 }

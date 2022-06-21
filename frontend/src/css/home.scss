@@ -29,6 +29,23 @@
 		}
 	}
 
+	.search-close--icon {
+		display: none;
+	}
+
+	.show-menu__button {
+		display: none;
+		cursor: pointer;
+	}
+	.logo--mobile {
+		display: none;
+	}
+
+	.mobile-menu--inner {
+		display: flex;
+		align-items: center;
+	}
+
 	.cart {
 		font-size: 18px;
     	margin-right: 30px;
@@ -96,7 +113,6 @@ main {
             box-shadow: rgb(33 35 38 / 10%) 0px 10px 10px -10px;
 
             img {
-                padding: 20px;
                 height: 100%;
                 width: 100%;
                 object-fit: cover;
