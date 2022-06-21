@@ -38,7 +38,7 @@ function App() {
         <main>
           <div className="container">
             <Routes>
-              {/* <Route path='/product/:slug' element={<SingleProduct/>} />
+              <Route path='/product/:slug' element={<SingleProduct/>} />
               <Route path='/cart' element={<Cart/>} />
               <Route path='/signin' element={<SingIn/>} />
               <Route path='/signup' element={<SignUp/>} />
@@ -48,15 +48,15 @@ function App() {
               <Route path='/placeholder' element={<Orderscreen />} />
               <Route path='/orderhistory' element={<ProtectedRoute><OrderHistory /></ProtectedRoute>} />
               <Route path='/users/profile' element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
-              <Route path='/order/:id' element={<ProtectedRoute><OrderDetails /></ProtectedRoute> } /> */}
+              <Route path='/order/:id' element={<ProtectedRoute><OrderDetails /></ProtectedRoute> } />
 
               {/* Admin Routes */}
-              {/* <Route path='/admin/dashboard' element={<AdminRoute><Dashboard /></AdminRoute>} />
+              <Route path='/admin/dashboard' element={<AdminRoute><Dashboard /></AdminRoute>} />
               <Route path='/admin/products' element={<AdminRoute><Products /></AdminRoute>} />
               <Route path='/admin/orders' element={<AdminRoute><Orders /></AdminRoute>} />
               <Route path='/admin/users' element={<AdminRoute><ListUsers /></AdminRoute>} />
               <Route path='/admin/user/:id' element={<AdminRoute><UserEdit /></AdminRoute>} />
-              <Route path='/admin/product/:id' element={<AdminRoute><ProductDetails /></AdminRoute>} /> */}
+              <Route path='/admin/product/:id' element={<AdminRoute><ProductDetails /></AdminRoute>} />
 
               <Route path='/' element={<FrontPage />} />
             </Routes>

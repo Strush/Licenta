@@ -29,7 +29,7 @@ export default function SearchBox() {
         /> 
         <FontAwesomeIcon icon={faTimes} className="search-close--icon" onClick={() => setShowSearch(false)} />
       </div>
-      <div className='ml-auto'>
+      <div className='ms-auto'>
         <Button type="submit" className='p-0' variant='' onClick={() => setShowSearch(!showSearch)}>
           <FontAwesomeIcon  icon={faSearch} className='me-3 mt-1' />
         </Button>
