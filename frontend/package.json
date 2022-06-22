@@ -24,7 +24,6 @@
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
     "react-toastify": "^8.2.0",
-    "sass": "^1.49.9",
     "use-reducer-logger": "^1.0.2",
     "web-vitals": "^2.1.4"
   },
@@ -51,5 +50,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "sass": "^1.53.0"
   }
 }
