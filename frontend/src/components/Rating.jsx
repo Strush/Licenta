@@ -1,4 +1,4 @@
-import React from "react";
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faStar,faStarHalfStroke} from '@fortawesome/free-solid-svg-icons';
 import {faStar as faStarRegular} from '@fortawesome/free-regular-svg-icons';

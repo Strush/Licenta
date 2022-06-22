@@ -1,4 +1,4 @@
-import React, {createContext, useReducer } from "react";
+import { createContext, useReducer } from "react";
 
 // Creat store [control global asupra -> State]
 export const Store = createContext();
