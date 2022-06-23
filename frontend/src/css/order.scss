@@ -1,15 +1,23 @@
 .finish-steps > div {
     border-bottom: 0.2rem solid #a0a0a0;
     color: #a0a0a0;
-    font-size: 14px;
     padding: 10px 5px;
     display: flex;
+    justify-content: space-evenly;
     align-items: center;
+
+    svg {
+      height: 26px;
+    }
   }
   .finish-steps > div.active {
     border-bottom: 0.2rem solid $teal;
     color: $teal;
     font-weight: 600;
+
+    svg {
+      color: $teal;
+    }
   }
 
   /* Pagina de finalizare */

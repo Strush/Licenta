@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faPenToSquare} from '@fortawesome/free-regular-svg-icons';
 import Rating from '../components/Rating';
 import {Store} from '../Store';
-import { Badge, Button, Card, Col, FloatingLabel, Form, ListGroup, ListGroupItem, Row } from 'react-bootstrap';
+import { Badge, Button, Card, FloatingLabel, Form, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
 const reducer = (state, action) => {

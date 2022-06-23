@@ -80,7 +80,7 @@ export default function Cart() {
                     <div className='quantity mb-3 mb-sm-4'>
                         Cantitatea: <strong>{cartItems.reduce((a,c) => a + c.quantity, 0)}</strong>
                     </div>
-                    <div className='price mb-3 mb-sm-4'>Pretul: 
+                    <div className='price mb-3 mb-sm-4'>Prețul: 
                         <strong>{cartItems.reduce((a,c) => a + c.price * c.quantity,0)} lei</strong>
                     </div>
                     <Button variant="primary w-100" onClick={checkoutHandler}>Cumpără</Button>
@@ -88,7 +88,7 @@ export default function Cart() {
             </>
         ) : (
             <div>
-                Cosul este gol, <Link to="/">mergi la cumparaturi</Link>
+                Cosul este gol, <Link to="/">mergi la cumpărături</Link>
             </div>
         )}
     </div>

@@ -123,7 +123,7 @@ export default function ProductDetails() {
 
     const uploadImageFile = async (e, fromImages) => {
         const file = e.target.files[0];
-        const bodyFormData = new FormData;
+        const bodyFormData = new FormData();
         bodyFormData.append('file',file);
         try {
             dispatch({type: 'UPLOAD_REQUEST'});
